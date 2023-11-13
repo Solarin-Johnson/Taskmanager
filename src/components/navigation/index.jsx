@@ -177,7 +177,7 @@ export function Head({ showMenu }) {
           <i class="fa-solid fa-magnifying-glass"></i>
         </label>
         <div className="notification">
-          <span className="notification-number"></span>
+          <span className="notification-number">2</span>
           <i class="fa-regular fa-bell"></i>
         </div>
       </div>

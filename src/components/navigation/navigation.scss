@@ -77,7 +77,24 @@
     }
     .notification {
       cursor: pointer;
+      position: relative;
       display: grid;
+
+      .notification-number {
+        width: 15px;
+        height: 15px;
+        position: absolute;
+        background: #8761e6;
+        color: #fff;
+        font-weight: 800;
+        border-radius: 50%;
+        font-size: 9px;
+        display: grid;
+        align-content: center;
+        justify-content: center;
+        top: -5px;
+        right: -5px;
+      }
     }
   }
 }
