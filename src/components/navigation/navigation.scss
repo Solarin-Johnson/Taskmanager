@@ -13,7 +13,7 @@
   position: fixed;
   height: 60px;
   width: calc(100vw - 90px);
-  z-index: 100;
+  z-index: 10;
   padding: 0 20px;
   padding-left: 90px;
   padding-top: 3px;
@@ -24,6 +24,7 @@
   color: #ffffff90;
   font-weight: 600;
   overflow: hidden;
+  background-color: #2a2d42;
 
   .top-header {
     display: grid;
