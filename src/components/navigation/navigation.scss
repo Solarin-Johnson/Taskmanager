@@ -1,0 +1,239 @@
+// DASHBOARD HEAD
+.dashboardMenuContainer {
+  width: 50px;
+  position: relative;
+  display: grid;
+  height: auto;
+  height: calc(100vh);
+}
+
+.dashboardHead {
+  left: 0;
+  top: 0;
+  position: fixed;
+  height: 60px;
+  width: 100vw;
+  z-index: 100;
+  padding: 0 20px;
+  padding-left: 90px;
+  padding-top: 3px;
+  display: grid;
+  grid-template-columns: 30px auto;
+  justify-items: center;
+  justify-content: start;
+  column-gap: 40px;
+  align-content: center;
+  font-size: 24px;
+  color: #ffffffd8;
+  font-weight: 600;
+
+  .name {
+    display: grid;
+    padding: 12px;
+    // background-color: #ffffff12;
+    border-radius: 50%;
+    font-size: 20px;
+  }
+}
+
+.headMenuBar {
+  display: grid;
+  align-self: center;
+  justify-content: center;
+  width: 100%;
+  cursor: pointer;
+  color: #ffffffc3;
+}
+
+.mainMenu span {
+  font-size: 22px !important;
+}
+
+.dashboardMenu {
+  overflow-y: hidden;
+  color: #00342a;
+  position: fixed;
+  width: 50px;
+  height: calc(100vh - 0px);
+  top: 0;
+  left: 0;
+  transition: 0.2s ease-in all;
+  overflow-x: hidden;
+  padding: 0px 10px 0px;
+  display: grid;
+  justify-content: start;
+  grid-template-columns: 1fr;
+  row-gap: 10px;
+  grid-template-rows: 50px auto auto;
+  box-shadow: 1.5px 0 0px #ffffff20;
+  z-index: 90;
+  background-color: #2a2d42;
+
+  .logo {
+    color: #fff;
+    padding-top: 20px;
+
+    display: grid;
+    align-content: center;
+    justify-content: start;
+    padding-left: 2px;
+
+    i {
+      background-color: #473d74;
+      padding: 12px;
+      border-radius: 50%;
+      justify-self: start;
+      color: #ae97f8;
+    }
+  }
+}
+
+.systemMenu {
+  height: auto;
+  justify-self: start;
+  width: 100%;
+  align-self: last baseline;
+  padding: 30px 0;
+  align-content: center;
+  align-items: center;
+  display: grid;
+  grid-template-rows: repeat(1, 55px);
+  grid-template-columns: 100%;
+  row-gap: 20px;
+
+  a {
+    width: 95%;
+    justify-self: start;
+    text-decoration: none;
+    color: #ffffffd8;
+    align-items: center !important;
+    display: grid !important;
+    height: 100% !important;
+  }
+}
+
+#spread {
+  width: 250px;
+  overflow-y: auto;
+  .mainMenuItems:hover {
+    background-color: #00000040;
+  }
+  .activeMenu {
+    background-color: #2a2d42;
+  }
+  .activeMenu:hover {
+    // background-color: #dbf2ee;
+  }
+
+  .mainMenuItemsIcon {
+    background-color: transparent;
+  }
+  .systemMenu {
+    border-top: 1px solid #ffffff26;
+  }
+}
+
+.mainMenuItemsIcon.activeMenu {
+  background-color: #dbf2ee !important;
+}
+
+.mainMenuItemsIcon {
+  background-color: transparent;
+  border-radius: 100%;
+  padding: 10px;
+  margin-left: -10px;
+  overflow: hidden;
+  text-align: center;
+  width: 22px;
+}
+.mainMenuItemsIcon:hover {
+  background-color: #40326b;
+}
+
+.mainMenuItems {
+  white-space: nowrap;
+}
+
+.mainMenu {
+  padding-top: 30px;
+  display: grid;
+  grid-template-rows: repeat(5, 55px);
+  row-gap: 8%;
+  min-height: 250px;
+
+  a {
+    justify-self: start;
+    width: 95%;
+    color: #ffffffee;
+    text-decoration: none;
+  }
+}
+
+.systemMenu {
+  align-items: center;
+}
+
+.mainMenuItems {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  justify-content: start;
+  padding-left: 12px;
+  align-items: center;
+  align-content: center;
+  column-gap: 20px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.mainMenuItemsIcon {
+  display: grid;
+  align-items: center;
+}
+
+.dashboardMenu::-webkit-scrollbar {
+  width: 5px;
+}
+
+.dashboardMenu::-webkit-scrollbar-thumb {
+  width: 6px;
+  border-radius: 100rem;
+  background-color: #ffffff68;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+@media screen and (min-width: 1240px) {
+  #spreadParent {
+    width: 250px;
+  }
+  .dashboardHead {
+    padding-top: 10px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .dashboardMenuContainer {
+    width: 0;
+  }
+  .dashboardMenu {
+    transform: translate(-100px);
+  }
+  #spread {
+    max-width: 250px;
+    transform: translateX(0);
+  }
+  .dashboardHead {
+    padding-left: 10px;
+    z-index: 0;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  #spread {
+    width: 80vw;
+  }
+}
