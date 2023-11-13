@@ -1,11 +1,12 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/navigation';
+import Dashboard from './pages/dashboard/dashboard';
 const links = createBrowserRouter([
   {
     path: "/",
-    element: <Navbar />,
-    // errorElement: <Error />,
+    element: <><Dashboard /></>,
+    errorElement: <><Dashboard /></>,
   },
 ])
 function App() {
