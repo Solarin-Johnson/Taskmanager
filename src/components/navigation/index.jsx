@@ -166,7 +166,21 @@ export function Head({ showMenu }) {
           <i class="fa-solid fa-bars"></i>{" "}
         </div>
       )}
-      <div className="name"></div>
+      <div className="top-header">
+        <label className="search">
+          <input
+            type="text"
+            name="search"
+            id="searchbox"
+            placeholder={"Search Task"}
+          />
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </label>
+        <div className="notification">
+          <span className="notification-number"></span>
+          <i class="fa-regular fa-bell"></i>
+        </div>
+      </div>
     </div>
   );
 }

@@ -12,37 +12,85 @@
   top: 0;
   position: fixed;
   height: 60px;
-  width: 100vw;
+  width: calc(100vw - 90px);
   z-index: 100;
   padding: 0 20px;
   padding-left: 90px;
   padding-top: 3px;
   display: grid;
-  grid-template-columns: 30px auto;
-  justify-items: center;
-  justify-content: start;
+  grid-template-columns: repeat(2, auto);
   column-gap: 40px;
-  align-content: center;
   font-size: 24px;
-  color: #ffffffd8;
+  color: #ffffff90;
   font-weight: 600;
+  overflow: hidden;
 
-  .name {
+  .top-header {
     display: grid;
-    padding: 12px;
-    // background-color: #ffffff12;
-    border-radius: 50%;
+    grid-template-columns: repeat(2, auto);
+    justify-items: end;
+    justify-self: end !important;
+    width: auto;
+    align-content: center;
+    align-items: center;
+    padding-right: 20px;
+    column-gap: 40px;
     font-size: 20px;
+    color: #ffffff90;
+
+    .search {
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      align-content: center;
+      align-items: center;
+      column-gap: 20px;
+      overflow: hidden;
+      width: 30px;
+      justify-content: end;
+      transition: 0.3s ease;
+
+      &:hover {
+        width: 100%;
+      }
+
+      i {
+        cursor: pointer;
+      }
+
+      input {
+        height: 40px;
+        border-radius: 10rem;
+        width: calc(35vw - 20px);
+        max-width: 400px;
+        border: none;
+        background-color: transparent;
+        padding: 0 10px;
+        font-size: 16px;
+        color: #fff;
+        outline: none;
+        border: 2px solid transparent;
+
+        &:focus {
+          border-color: #ffffff25;
+        }
+      }
+    }
+    .notification {
+      cursor: pointer;
+      display: grid;
+    }
   }
 }
 
 .headMenuBar {
+  justify-self: start;
   display: grid;
   align-self: center;
   justify-content: center;
-  width: 100%;
+  width: 30px;
+  font-size: 25px;
   cursor: pointer;
-  color: #ffffffc3;
+  color: #ffffff90;
 }
 
 .mainMenu span {
@@ -214,6 +262,7 @@ a {
   }
   .dashboardHead {
     padding-top: 10px;
+    grid-template-columns: auto;
   }
 }
 
@@ -231,11 +280,23 @@ a {
   .dashboardHead {
     padding-left: 10px;
     z-index: 0;
+    width: calc(100vw - 10px);
+  }
+  .search {
+    input {
+      width: calc(43vw - 20px) !important;
+    }
   }
 }
 
 @media screen and (max-width: 350px) {
   #spread {
     width: 80vw;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .search {
+    width: 100% !important;
   }
 }
