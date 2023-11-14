@@ -3,13 +3,17 @@ import Navbar from "../../components/navigation";
 import "./dashboard.scss";
 import Table from "../../components/table";
 export default function Dashboard() {
+  const [quickTask, setQuickTask] = useState();
+  const qTask = (e) => {
+    setQuickTask(e);
+  };
   return (
     <div className="dashboard">
       <Navbar />
       <div className="dashboard-container">
         <UserCard />
-        <TodayList />
-        <NewTask />
+        <TodayList quickTask={quickTask} />
+        <NewTask qTask={qTask} />
       </div>
     </div>
   );
@@ -81,31 +85,19 @@ export function UserCard({ progress = 65 }) {
   );
 }
 
-export function TodayList() {
+export function TodayList({ quickTask }) {
   const currentDate = new Date();
   const options = { day: "2-digit", month: "short", year: "numeric" };
   var todayDate = currentDate.toLocaleDateString("en-UK", options);
   var todayDay = currentDate.toLocaleDateString("en-US", { weekday: "long" });
-  const tasks = [
-    {
-      task: "Create home page Puzzle",
-      priority: "high",
-      complete: false,
-      time: "2 PM",
-    },
-    {
-      task: "Wizkid Concert",
-      priority: "high",
-      complete: true,
-      time: "6 PM",
-    },
-    {
-      task: "Take a Walk",
-      priority: "normal",
-      complete: false,
-      time: "2 PM",
-    },
-  ];
+  const storedTasks = JSON.parse(localStorage.getItem("tasks")) || false;
+  const [tasks, setTask] = useState(storedTasks);
+  const tabContainer = useRef(null)
+  useEffect(() => {
+    const storedTasks = JSON.parse(localStorage.getItem("tasks")) || false;
+    setTask(storedTasks);
+  }, [quickTask]);
+
   return (
     <div className="table">
       <div className="table-header">
@@ -117,52 +109,57 @@ export function TodayList() {
           <span>{todayDay}</span> <span>{todayDate}</span>
         </div>
       </div>
-      <div className="table-container">
-        {tasks.map((task, index) => (
-          <Table
-            task={task.task}
-            priority={task.priority}
-            complete={task.complete}
-            time={task.time}
-            key={index}
-          />
-        ))}
+      <div className="table-container" ref={tabContainer}>
+        {(tasks &&
+          tasks.map((task, index) => (
+            <Table
+              task={task.task}
+              priority={task.priority}
+              complete={task.complete}
+              time={task.time}
+              key={index}
+            />
+          ))) || <Table />}
       </div>
     </div>
   );
 }
 
-export function NewTask() {
+export function NewTask({ qTask }) {
+  const quickTaskValue = useRef(null);
+  const quickTask = () => {
+    const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    if (quickTaskValue.current.value.length >= 5) {
+      const newTask = [
+        ...storedTasks,
+        {
+          task: quickTaskValue.current.value,
+          priority: "normal",
+          time: "Soon",
+        },
+      ];
+      localStorage.setItem("tasks", JSON.stringify(newTask));
+      qTask(newTask);
+    }
+  };
   return (
     <div className="newtask">
-      <div className="newtask-head">New Task</div>
+      <div className="newtask-head">
+        Quick Task
+        <i class="fa-solid fa-plus"></i>
+      </div>
       <div className="newtask-task">
-        <input name="" id="newtask-text" maxLength={50} />
+        <textarea
+          name=""
+          ref={quickTaskValue}
+          id="newtask-text"
+          maxLength={100}
+        />
       </div>
-      <div className="newtask-priority">
-        <div>Priority</div>
-        <div>
-          <i class="fa-solid fa-fire-flame-curved"></i>
-          <span>High</span>
-        </div>
-        <div>
-          <i class="fa-solid fa-fire-flame-curved"></i>
-          <span>Normal</span>
-        </div>
+
+      <div className="newtask-submit" onClick={quickTask}>
+        Create Task
       </div>
-      <div className="newtask-time">
-        <div>
-          Time <i class="fa-solid fa-clock"></i>
-        </div>
-        <input type="number" name="" id="time" maxLength={2} />
-      </div>
-      <label htmlFor="date" className="newtask-date">
-        <div>
-          Date <i class="fa-regular fa-calendar"></i>
-        </div>
-        <input type="date" name="" id="date" maxLength={2} />
-      </label>
-      <div className="newtask-submit">Create Task</div>
     </div>
   );
 }
