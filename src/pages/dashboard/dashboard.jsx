@@ -9,6 +9,7 @@ export default function Dashboard() {
       <div className="dashboard-container">
         <UserCard />
         <TodayList />
+        <NewTask />
       </div>
     </div>
   );
@@ -132,5 +133,36 @@ export function TodayList() {
 }
 
 export function NewTask() {
-  return <div className="newtask"></div>;
+  return (
+    <div className="newtask">
+      <div className="newtask-head">New Task</div>
+      <div className="newtask-task">
+        <input name="" id="newtask-text" maxLength={50} />
+      </div>
+      <div className="newtask-priority">
+        <div>Priority</div>
+        <div>
+          <i class="fa-solid fa-fire-flame-curved"></i>
+          <span>High</span>
+        </div>
+        <div>
+          <i class="fa-solid fa-fire-flame-curved"></i>
+          <span>Normal</span>
+        </div>
+      </div>
+      <div className="newtask-time">
+        <div>
+          Time <i class="fa-solid fa-clock"></i>
+        </div>
+        <input type="number" name="" id="time" maxLength={2} />
+      </div>
+      <label htmlFor="date" className="newtask-date">
+        <div>
+          Date <i class="fa-regular fa-calendar"></i>
+        </div>
+        <input type="date" name="" id="date" maxLength={2} />
+      </label>
+      <div className="newtask-submit">Create Task</div>
+    </div>
+  );
 }
