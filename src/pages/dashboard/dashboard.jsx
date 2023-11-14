@@ -93,14 +93,14 @@ export function TodayList() {
       time: "2 PM",
     },
     {
-      task: "Take a Walk",
-      priority: "high",
-      complete: false,
-      time: "2 PM",
-    },
-    {
       task: "Wizkid Concert",
       priority: "high",
+      complete: true,
+      time: "6 PM",
+    },
+    {
+      task: "Take a Walk",
+      priority: "normal",
       complete: false,
       time: "2 PM",
     },
