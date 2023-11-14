@@ -8,7 +8,7 @@ export default function Dashboard() {
       <Navbar />
       <div className="dashboard-container">
         <UserCard />
-        <TaskList />
+        <TodayList />
       </div>
     </div>
   );
@@ -80,12 +80,31 @@ export function UserCard({ progress = 65 }) {
   );
 }
 
-export function TaskList() {
+export function TodayList() {
   const currentDate = new Date();
   const options = { day: "2-digit", month: "short", year: "numeric" };
   var todayDate = currentDate.toLocaleDateString("en-UK", options);
   var todayDay = currentDate.toLocaleDateString("en-US", { weekday: "long" });
-
+  const tasks = [
+    {
+      task: "Create home page Puzzle",
+      priority: "high",
+      complete: false,
+      time: "2 PM",
+    },
+    {
+      task: "Take a Walk",
+      priority: "high",
+      complete: false,
+      time: "2 PM",
+    },
+    {
+      task: "Wizkid Concert",
+      priority: "high",
+      complete: false,
+      time: "2 PM",
+    },
+  ];
   return (
     <div className="table">
       <div className="table-header">
@@ -98,7 +117,15 @@ export function TaskList() {
         </div>
       </div>
       <div className="table-container">
-        <Table />
+        {tasks.map((task, index) => (
+          <Table
+            task={task.task}
+            priority={task.priority}
+            complete={task.complete}
+            time={task.time}
+            key={index}
+          />
+        ))}
       </div>
     </div>
   );

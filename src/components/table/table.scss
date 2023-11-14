@@ -3,4 +3,116 @@
   height: 50px;
   border-radius: 10px;
   background-color: #333750;
+  grid-template-columns: repeat(5, auto);
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  padding: 0 50px;
+  font-size: 15px;
+  &-check {
+    font-size: 24px;
+    align-self: center;
+    justify-self: start;
+    color: #ffffff80;
+    cursor: pointer;
+  }
+  &-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 16px;
+    transition: 0.5s ease;
+    text-align-last: left;
+    width: 35vw;
+    max-width: 600px;
+    justify-self: start;
+  }
+  &-priority,
+  &-time {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    column-gap: 10px;
+    align-content: center;
+    align-items: center;
+    color: #ffffff80;
+    transition: 0.5s ease;
+  }
+  &-priority {
+    color: #8761e6;
+  }
+  &-status {
+    background-color: #8761e657;
+    color: #c7b1ff;
+    padding: 7px 15px;
+    border-radius: 10rem;
+    font-weight: 600;
+    width: 80px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 920px) {
+  .table-items {
+    grid-template-columns: repeat(4, auto);
+    &-name {
+      max-width: 300px;
+    }
+    &-priority,
+    &-time {
+      grid-template-columns: repeat(2, auto);
+
+      :first-child {
+        display: none;
+      }
+    }
+    &-status {
+      display: none;
+    }
+  }
+}
+
+#complete {
+  background-color: #00ff0030;
+  color: #b9ffb9;
+}
+
+#checked {
+  color: #00c400;
+}
+
+#high_prior {
+  color: #d59f12;
+}
+
+@media screen and (max-width: 600px) {
+  .table-items {
+    padding: 0 20px;
+    &-name {
+      width: calc(100vw - 180px);
+
+      &:hover {
+        width: 200px;
+      }
+    }
+    &-priority,
+    &-time {
+      user-select: none;
+      grid-template-columns: repeat(2, auto);
+      justify-items: center;
+      overflow: hidden;
+      width: 20px;
+      white-space: nowrap;
+      column-gap: 8px;
+
+      &:hover {
+        width: 60px;
+      }
+    }
+    &-status {
+      color: transparent;
+      width: 0px;
+      padding: 8px;
+      overflow: hidden;
+    }
+  }
 }

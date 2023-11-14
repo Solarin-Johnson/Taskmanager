@@ -4,6 +4,7 @@
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: auto 1fr;
+  overflow-x: hidden;
 
   &-container {
     display: grid;
@@ -144,7 +145,7 @@
     }
   }
   &-tabs {
-    align-self: center;
+    align-self: last baseline;
     height: 30px;
     padding-top: 15px;
     // margin-top: 12px;
@@ -247,6 +248,11 @@
       color: #ffffff80;
     }
   }
+  &-container {
+    display: grid;
+    align-content: start;
+    row-gap: 20px;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -303,16 +309,16 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 920px) {
   .dashboard {
     &-container {
     }
   }
   .usercard {
     grid-column: 1/8;
-    grid-row: 1/5;
+    grid-row: 1/6;
   }
   .table {
-    grid-row: 5/14;
+    grid-row: 6/14;
   }
 }
