@@ -130,3 +130,7 @@ export function TodayList() {
     </div>
   );
 }
+
+export function NewTask() {
+  return <div className="newtask"></div>;
+}

@@ -98,7 +98,10 @@
   .table-items {
     padding: 0 25px;
     &-name {
-      width: calc(100vw - 180px);
+      max-width: calc(100vw - 190px);
+      width: 40vw;
+      overflow-x: auto;
+      text-overflow: clip;
     }
     &-priority,
     &-time {
@@ -111,7 +114,7 @@
       column-gap: 8px;
 
       &:hover {
-        width: 60px;
+        width: 70px;
       }
     }
     &-status {
