@@ -1,11 +1,25 @@
 import { useState } from "react";
 import "./table.scss";
-export default function Table({ task, status, priority, complete, time }) {
+export default function Table({
+  task,
+  status,
+  priority,
+  complete,
+  time,
+  index,
+}) {
   const [checked, setChecked] = useState(complete);
+  const storedTasks = JSON.parse(localStorage.getItem("tasks"));
+
   const check = () => {
+    const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    console.log(index);
     setChecked(!checked);
+    const newState = [...storedTasks];
+    newState[index].complete = !checked;
+    localStorage.setItem("tasks", JSON.stringify(newState));
   };
-  if (task) {
+  if (task && storedTasks) {
     return (
       <div className="table-items">
         <div className="table-items-check" onClick={check}>
@@ -30,7 +44,7 @@ export default function Table({ task, status, priority, complete, time }) {
         </div>
       </div>
     );
-  } else {
+  } else if (!task && !storedTasks) {
     return (
       <div className="table-items null">
         No tasks available, just chill and enjoy!{" "}
