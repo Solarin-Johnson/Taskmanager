@@ -48,7 +48,7 @@ export function TableList({ quickTask }) {
           </div>
         </div>
         <div className="table-container" ref={tabContainer}>
-          {(tasks &&
+          {(todayTable.length > 0 &&
             todayTable.map((task, index) => (
               <Table
                 task={task[0].task}
@@ -69,14 +69,15 @@ export function TableList({ quickTask }) {
           </div>
         </div>
         <div className="table-container" ref={tabContainer}>
-          {(tasks &&
+          {(upcomingTable.length > 0 &&
             upcomingTable.map((task, index) => (
               <Table
                 task={task[0].task}
                 priority={task[0].priority}
                 complete={task[0].complete}
-                time={task[0].time}
+                time={task[0].date}
                 index={task[1]}
+                i={index}
               />
             ))) || <Table />}
         </div>

@@ -7,6 +7,7 @@ export default function Table({
   complete,
   time,
   index,
+  i,
 }) {
   const [checked, setChecked] = useState(complete);
   const storedTasks = JSON.parse(localStorage.getItem("tasks"));
@@ -19,7 +20,7 @@ export default function Table({
     newState[index].complete = !checked;
     localStorage.setItem("tasks", JSON.stringify(newState));
   };
-  if (task && storedTasks) {
+  if (task) {
     return (
       <div className="table-items">
         <div className="table-items-check" onClick={check}>
@@ -44,10 +45,11 @@ export default function Table({
         </div>
       </div>
     );
-  } else if (!task && !storedTasks) {
+  } else {
+    console.log("false");
     return (
       <div className="table-items null">
-        No tasks available, just chill and enjoy!{" "}
+        No tasks available, Enjoy your day!{" "}
       </div>
     );
   }
