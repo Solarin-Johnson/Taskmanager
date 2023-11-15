@@ -18,12 +18,14 @@ export default function Dashboard() {
   if (!localStorage.getItem("first")) {
     localStorage.setItem("first", dayIndex);
   }
+  var today = 0;
   try {
     tasks.map((data, index) => {
       if (
         Number(data.dayIndex) === Number(dayIndex) &&
         Number(data.monthIndex) === Number(monthIndex)
       ) {
+        today += 1;
         if (data.complete === true) {
           streakArray.push(data);
         }
@@ -36,7 +38,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     localStorage.setItem("streak", Math.round(streakArray.length));
-    setProgress(Math.round((streakArray.length / tasks.length) * 100));
+    setProgress(Math.round((streakArray.length / today) * 100));
     setStreak(Math.abs(dayIndex - Number(localStorage.getItem("first"))));
   }, []);
 

@@ -4,7 +4,6 @@
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: auto 1fr;
-  overflow-x: hidden;
 
   &-container {
     display: grid;
@@ -78,7 +77,6 @@
       transition: 0.5s ease;
       background-color: #8761e6;
       height: 100%;
-      width: 15%;
     }
   }
   &-game {
@@ -148,7 +146,6 @@
   }
   &-tabs {
     align-self: last baseline;
-    height: 30px;
     padding-top: 15px;
     // margin-top: 12px;
     border-top: 2px solid #ffffff1b;
@@ -192,16 +189,28 @@
       background-color: #d2c4ff26;
       padding: 5px 5px 5px 10px;
       border-radius: 10rem;
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      align-items: center;
+      justify-items: center;
+      text-align: center;
 
       :last-child {
         margin-left: 10px;
         padding: 5px 6px;
         border: 2px solid #ffffff1b;
         border-radius: 50%;
+        justify-content: center;
+      }
+
+      :first-child {
+        // background-color: #fff;
+        // justify-self: center;
+        padding-left: 5px;
       }
 
       &:hover {
-        background-color: #9e80ff93;
+        background-color: #8761e6;
         color: #fff;
       }
     }
@@ -269,6 +278,9 @@
     &-container {
       padding: 70px 10px 5px 10px;
     }
+    .usercard {
+      grid-template-rows: 1fr 80px;
+    }
   }
 
   .usercard {
@@ -281,7 +293,6 @@
     }
     &-progress {
       height: 30px;
-      margin-top: 5px;
       span {
         font-size: 13px;
       }
@@ -299,6 +310,8 @@
     &-tabs {
       grid-template-columns: 1fr auto;
       justify-items: start;
+      grid-template-rows: 1fr;
+      height: 70%;
       &-title {
         display: none;
       }
