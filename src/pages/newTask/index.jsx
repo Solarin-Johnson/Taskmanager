@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import './newtask.scss'
+import "./newtask.scss";
 
 export function NewTask({ qTask }) {
   const quickTaskValue = useRef(null);
@@ -8,6 +8,8 @@ export function NewTask({ qTask }) {
     const today = new Date();
     const options = { month: "short", day: "2-digit" };
     const todaysdate = new Intl.DateTimeFormat("en-US", options).format(today);
+    const dayIndex = today.getDate().toString().padStart(2, "0");
+    const monthIndex = today.getMonth().toString().padStart(2, "0");
     if (quickTaskValue.current.value.length >= 5) {
       const newTask = [
         ...storedTasks,
@@ -17,6 +19,8 @@ export function NewTask({ qTask }) {
           time: "Soon",
           complete: false,
           date: todaysdate,
+          dayIndex: dayIndex,
+          monthIndex: monthIndex,
         },
       ];
       localStorage.setItem("tasks", JSON.stringify(newTask));
@@ -27,7 +31,7 @@ export function NewTask({ qTask }) {
     <div className="newtask">
       <div className="newtask-head">
         Quick Task
-        <i class="fa-solid fa-plus"></i>
+        <i className="fa-solid fa-plus"></i>
       </div>
       <div className="newtask-task">
         <textarea

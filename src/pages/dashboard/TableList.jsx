@@ -17,9 +17,35 @@ export function TableList({ quickTask }) {
     day: "2-digit",
   }).format(currentDate);
 
+  const dayIndex = currentDate.getDate().toString().padStart(2, "0");
+  const monthIndex = currentDate.getMonth().toString().padStart(2, "0");
+
+  useEffect(() => {
+    try {
+      const updatedTasks = [...tasks];
+      updatedTasks.map((data, index) => {
+        if (
+          Number(data.monthIndex) < Number(monthIndex) &&
+          Number(data.dayIndex) <= Number(dayIndex)
+        ) {
+          console.log(dayIndex);
+          updatedTasks.splice(index, 1);
+          setTask(updatedTasks);
+        }
+        console.log(data.dayIndex, data.monthIndex, monthIndex);
+        return localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   try {
     tasks.map((data, index) => {
-      if (data.date === todaysdate) {
+      if (
+        Number(data.dayIndex) === Number(dayIndex) &&
+        Number(data.monthIndex) === Number(monthIndex)
+      ) {
         todayTable.push([data, index]);
       } else {
         upcomingTable.push([data, index]);
@@ -51,6 +77,7 @@ export function TableList({ quickTask }) {
           {(todayTable.length > 0 &&
             todayTable.map((task, index) => (
               <Table
+                key={index}
                 task={task[0].task}
                 priority={task[0].priority}
                 complete={task[0].complete}
@@ -78,6 +105,7 @@ export function TableList({ quickTask }) {
                 time={task[0].date}
                 index={task[1]}
                 i={index}
+                key={index}
               />
             ))) || <Table />}
         </div>

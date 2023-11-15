@@ -87,7 +87,7 @@ export function Menubar({ showMenu }) {
         onMouseLeave={unSpread}
       >
         <div className="logo">
-          <i class="fa-solid fa-check-double"></i>
+          <i className="fa-solid fa-check-double"></i>
         </div>
         <div className="mainMenu" ref={mainMenu}>
           {menuItems.map((name, index) => (
@@ -163,7 +163,7 @@ export function Head({ showMenu }) {
     <div className="dashboardHead">
       {browserWidth < 1240 && (
         <div ref={menuElement} className="headMenuBar" onClick={clickedMenu}>
-          <i class="fa-solid fa-bars"></i>{" "}
+          <i className="fa-solid fa-bars"></i>{" "}
         </div>
       )}
       <div className="top-header">
@@ -174,11 +174,11 @@ export function Head({ showMenu }) {
             id="searchbox"
             placeholder={"Search Task"}
           />
-          <i class="fa-solid fa-magnifying-glass"></i>
+          <i className="fa-solid fa-magnifying-glass"></i>
         </label>
         <div className="notification">
           <span className="notification-number">2</span>
-          <i class="fa-regular fa-bell"></i>
+          <i className="fa-regular fa-bell"></i>
         </div>
       </div>
     </div>

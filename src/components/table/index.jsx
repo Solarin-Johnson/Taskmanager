@@ -24,7 +24,10 @@ export default function Table({
     return (
       <div className="table-items">
         <div className="table-items-check" onClick={check}>
-          <i id={checked && "checked"} class="fa-regular fa-circle-check"></i>
+          <i
+            id={(checked && "checked") || ""}
+            className="fa-regular fa-circle-check"
+          ></i>
         </div>
         <div className="table-items-name">{task}</div>
         <div
@@ -32,15 +35,15 @@ export default function Table({
           className="table-items-priority"
         >
           <span>Priority</span>
-          <i class="fa-solid fa-fire-flame-curved"></i>
+          <i className="fa-solid fa-fire-flame-curved"></i>
           <span>{priority || "normal"}</span>
         </div>
         <div className="table-items-time">
           <span>Time</span>
-          <i class="fa-regular fa-calendar-days"></i>
+          <i className="fa-regular fa-calendar-days"></i>
           <span>{time}</span>
         </div>
-        <div id={checked && "complete"} className="table-items-status">
+        <div id={(checked && "complete") || ""} className="table-items-status">
           {checked ? "Completed" : "In Progress"}
         </div>
       </div>
