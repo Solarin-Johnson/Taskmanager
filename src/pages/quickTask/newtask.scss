@@ -1,5 +1,5 @@
 .newtask {
-  max-width: 300px;
+  max-width: 350px;
   width: calc(100% - 60px);
   justify-self: end;
   grid-row: 1/6;
@@ -17,6 +17,12 @@
   &-head {
     font-weight: 600;
     color: #fff;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+
+    :last-child {
+      justify-self: end;
+    }
     i {
       margin-left: 15px;
     }

@@ -1,14 +1,46 @@
 import { useEffect, useRef, useState } from "react";
 import Navbar from "../../components/navigation";
 import "./dashboard.scss";
-import { NewTask } from "../newTask";
+import { NewTask } from "../quickTask";
 import { TableList } from "./TableList";
 export default function Dashboard() {
   const [quickTask, setQuickTask] = useState();
   const storedTasks = JSON.parse(localStorage.getItem("tasks")) || false;
   const [tasks, setTask] = useState(storedTasks);
-  var completed = [];
+  const storeStreak = localStorage.getItem("streak") || 0;
 
+  const [streak, setStreak] = useState(storeStreak);
+  const [progress, setProgress] = useState(storeStreak);
+  const streakArray = [];
+  const currentDate = new Date();
+  const dayIndex = currentDate.getDate().toString().padStart(2, "0");
+  const monthIndex = currentDate.getMonth().toString().padStart(2, "0");
+  if (!localStorage.getItem("first")) {
+    localStorage.setItem("first", dayIndex);
+  }
+  try {
+    tasks.map((data, index) => {
+      if (
+        Number(data.dayIndex) === Number(dayIndex) &&
+        Number(data.monthIndex) === Number(monthIndex)
+      ) {
+        if (data.complete === true) {
+          streakArray.push(data);
+        }
+      }
+      return data;
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
+  useEffect(() => {
+    localStorage.setItem("streak", Math.round(streakArray.length));
+    setProgress(Math.round((streakArray.length / tasks.length) * 100));
+    setStreak(Math.abs(dayIndex - Number(localStorage.getItem("first"))));
+  }, []);
+
+  const completed = [];
   try {
     tasks.map((data, i) => {
       if (data.complete === true) {
@@ -27,7 +59,11 @@ export default function Dashboard() {
     <div className="dashboard">
       <Navbar />
       <div className="dashboard-container">
-        <UserCard points={completed.length} />
+        <UserCard
+          points={completed.length * 3}
+          streak={streak}
+          progress={progress}
+        />
         <TableList quickTask={quickTask} />
         <NewTask qTask={qTask} />
       </div>
@@ -35,7 +71,7 @@ export default function Dashboard() {
   );
 }
 
-export function UserCard({ progress, points }) {
+export function UserCard({ progress, points, streak }) {
   const profile = useRef(null);
   const [browserWidth, setBrowserWidth] = useState(window.innerWidth);
 
@@ -76,7 +112,7 @@ export function UserCard({ progress, points }) {
             <span>{points || 0}</span>
           </div>
           <div className="usercard-streak">
-            <i className="fa-solid fa-fire"></i> <span>3</span>
+            <i className="fa-solid fa-fire"></i> <span>{streak || 0}</span>
           </div>
         </div>
       </div>

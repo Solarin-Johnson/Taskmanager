@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import './App.css';
+import './App.scss';
 import Navbar from './components/navigation';
 import Dashboard from './pages/dashboard/dashboard';
 const links = createBrowserRouter([
