@@ -70,9 +70,15 @@
   &-field {
     display: grid;
     grid-template-rows: auto 40px;
-    row-gap: 5px;
+    row-gap: 8px;
     :first-child {
       font-size: 16px;
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      align-items: center;
+      justify-content: start;
+      column-gap: 5px;
+      color: #ffffffb7;
     }
     input {
       background-color: transparent;
@@ -94,7 +100,19 @@
   &-cluster {
     display: grid;
     grid-template-rows: auto 35px;
-    row-gap: 5px;
+    row-gap: 8px;
+    :first-child {
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      align-items: center;
+      justify-content: start;
+      column-gap: 5px;
+      color: #ffffffb7;
+
+      :last-child {
+        width: 20px;
+      }
+    }
     :last-child {
       display: grid;
       grid-template-columns: repeat(2, auto);
@@ -132,6 +150,21 @@
         color: #ae97f8;
         font-weight: 600;
       }
+    }
+  }
+  &-btn {
+    padding: 20px 20px;
+    display: grid;
+    div {
+      height: 50px;
+      background-color: #795bcd;
+      border-radius: 4px;
+      align-content: center;
+      justify-content: center;
+      display: grid;
+      font-size: 20px;
+      color: #fff;
+      font-weight: 700;
     }
   }
 }

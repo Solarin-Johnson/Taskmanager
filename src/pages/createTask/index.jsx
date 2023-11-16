@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./createTask.scss";
 export default function CreateTask() {
   const currentYear = new Date().getFullYear();
@@ -23,18 +23,67 @@ export default function CreateTask() {
     );
   });
 
-  const [day, setDay] = useState("");
-  const [month, setMonth] = useState("");
-  const [selectedDate, setSelectedDate] = useState("");
+  const time = [
+    { value: "1", name: "01" },
+    { value: "2", name: "02" },
+    { value: "3", name: "03" },
+    { value: "4", name: "04" },
+    { value: "5", name: "05" },
+    { value: "6", name: "06" },
+    { value: "7", name: "07" },
+    { value: "8", name: "08" },
+    { value: "9", name: "09" },
+    { value: "10", name: "10" },
+    { value: "11", name: "11" },
+    { value: "12", name: "12" },
+  ];
 
+  const thisDate = new Date();
+  const initDate = new Date(
+    `2000-${thisDate.getMonth() + 1}-${thisDate.getDate()}`
+  ).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+
+  const [day, setDay] = useState("");
+  const [month, setMonth] = useState(months[0].value);
+  const [data, setData] = useState({
+    title: "",
+    date: initDate,
+    time: "1",
+    xTime: "AM",
+    priority: "high",
+  });
+
+  const [taskTime, setTaskTime] = useState(1);
+  const [taskxTime, setTaskxTime] = useState("AM");
+  const [priority, setPriority] = useState("AM");
+  const [selectedDate, setSelectedDate] = useState("");
+  const dayElement = useRef(null);
+
+  useEffect(() => {
+    updateSelectedDate();
+  }, [day, month]);
+
+  console.log(data);
   const updateSelectedDate = () => {
-    if (day && month) {
-      setSelectedDate(`${month}-${day}`);
+    if (day || month) {
+      const options = { month: "short", day: "numeric" };
+      const MMMD = new Date(`2000-${month}-${day}`).toLocaleDateString(
+        "en-US",
+        options
+      );
+      setSelectedDate(MMMD);
+      setData((prevData) => ({
+        ...prevData,
+        date: MMMD,
+      }));
     } else {
       setSelectedDate("");
     }
   };
+
   const updateDayOptions = () => {
+    const currentMonth = new Date().getMonth() + 1;
+    const currentDay = new Date().getDate();
     const daysInMonth = new Date(
       new Date().getFullYear(),
       Number(month),
@@ -44,8 +93,11 @@ export default function CreateTask() {
     const dayOptions = Array.from(
       { length: daysInMonth },
       (_, index) => index + 1
+    ).filter(
+      (dayOption) =>
+        (dayOption >= currentDay && Number(month) === currentMonth) ||
+        (dayOption >= 0 && Number(month) !== currentMonth)
     );
-
     return (
       <>
         <option value="Time" disabled>
@@ -69,13 +121,30 @@ export default function CreateTask() {
         </div>
         <div className="create-task-form">
           <label className="create-task-field">
-            <div>Title</div>
-            <input type="text" name="title" id="title" />
+            <div>
+              <span>Title</span>
+              <i className="fa-regular fa-file-lines"></i>
+            </div>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              onChange={(e) =>
+                setData((prevData) => ({
+                  ...prevData,
+                  title: e.target.value,
+                }))
+              }
+            />
           </label>
           <div className="create-task-cluster">
-            <div>Due date</div>
+            <div>
+              <span>Date</span>
+              <i className="fa-regular fa-calendar"></i>
+            </div>
             <div className="due">
               <select
+                ref={dayElement}
                 id="day"
                 value={day}
                 onChange={(e) => setDay(e.target.value)}
@@ -96,6 +165,70 @@ export default function CreateTask() {
               </select>
             </div>
           </div>
+          <div className="create-task-cluster">
+            <div>
+              <span>Time</span>
+              <i className="fa-regular fa-clock"></i>
+            </div>
+            <div>
+              <select
+                name="time"
+                id="time"
+                onChange={(e) =>
+                  setData((prevData) => ({
+                    ...prevData,
+                    name: e.target.value,
+                  }))
+                }
+              >
+                <option value="Time" disabled>
+                  Time
+                </option>
+                {time.map((hour, i) => (
+                  <option value={hour.value} key={hour.value}>
+                    {hour.name}
+                  </option>
+                ))}
+              </select>
+              <select
+                name=""
+                id=""
+                onChange={(e) =>
+                  setData((prevData) => ({
+                    ...prevData,
+                    xTime: e.target.value,
+                  }))
+                }
+              >
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+              </select>
+            </div>
+          </div>
+          <label className="create-task-cluster">
+            <div>
+              <span>Priority</span>
+              <i className="fa-solid fa-fire-flame-curved"></i>
+            </div>
+            <div>
+              <select
+                name="streak"
+                id="streak"
+                onChange={(e) =>
+                  setData((prevData) => ({
+                    ...prevData,
+                    priority: e.target.value,
+                  }))
+                }
+              >
+                <option value="High">High</option>
+                <option value="Normal">Normal</option>
+              </select>
+            </div>
+          </label>
+        </div>
+        <div className="create-task-btn">
+          <div>Create</div>
         </div>
       </div>
     </div>
