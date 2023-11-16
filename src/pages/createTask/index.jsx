@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./createTask.scss";
-export default function CreateTask() {
+export default function CreateTask({ qTask, newPop, popReturn }) {
   const currentYear = new Date().getFullYear();
   const months = [
     { value: "01", name: "January" },
@@ -42,8 +42,7 @@ export default function CreateTask() {
   const initDate = new Date(
     `2000-${thisDate.getMonth() + 1}-${thisDate.getDate()}`
   ).toLocaleDateString("en-US", { month: "short", day: "numeric" });
-
-  const [day, setDay] = useState("");
+  const [day, setDay] = useState(thisDate.getDate());
   const [month, setMonth] = useState(months[0].value);
   const [data, setData] = useState({
     title: "",
@@ -52,34 +51,29 @@ export default function CreateTask() {
     xTime: "AM",
     priority: "high",
   });
-
-  const [taskTime, setTaskTime] = useState(1);
-  const [taskxTime, setTaskxTime] = useState("AM");
-  const [priority, setPriority] = useState("AM");
   const [selectedDate, setSelectedDate] = useState("");
-  const dayElement = useRef(null);
+  const titleInput = useRef(null);
+  const [err, setErr] = useState(false);
 
   useEffect(() => {
     updateSelectedDate();
   }, [day, month]);
 
-  console.log(data);
   const updateSelectedDate = () => {
-    if (day || month) {
-      const options = { month: "short", day: "numeric" };
-      const MMMD = new Date(`2000-${month}-${day}`).toLocaleDateString(
-        "en-US",
-        options
-      );
-      setSelectedDate(MMMD);
-      setData((prevData) => ({
-        ...prevData,
-        date: MMMD,
-      }));
-    } else {
-      setSelectedDate("");
-    }
+    const options = { month: "short", day: "numeric" };
+    const MMMD = new Date(`2000-${month}-${day}`).toLocaleDateString(
+      "en-US",
+      options
+    );
+    setSelectedDate(MMMD);
   };
+
+  useEffect(() => {
+    setData((prevData) => ({
+      ...prevData,
+      date: selectedDate,
+    }));
+  }, [selectedDate]);
 
   const updateDayOptions = () => {
     const currentMonth = new Date().getMonth() + 1;
@@ -111,10 +105,55 @@ export default function CreateTask() {
       </>
     );
   };
+  const monthAbbreviations = {
+    Jan: 1,
+    Feb: 2,
+    Mar: 3,
+    Apr: 4,
+    May: 5,
+    Jun: 6,
+    Jul: 7,
+    Aug: 8,
+    Sep: 9,
+    Oct: 10,
+    Nov: 11,
+    Dec: 12,
+  };
+  const submitTask = () => {
+    if (data.title.length < 5) {
+      setErr(true);
+    } else {
+      const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      const newTask = [
+        ...storedTasks,
+        {
+          task: data.title,
+          priority: data.priority,
+          time: `${data.time}${data.xTime}`,
+          complete: false,
+          date: data.date,
+          dayIndex: parseInt(data.date.split(" ")[1], 10),
+          monthIndex: monthAbbreviations[data.date.split(" ")[0]],
+        },
+      ];
+      localStorage.setItem("tasks", JSON.stringify(newTask));
+      qTask(newTask);
+      //   hide();
+      popReturn(false);
+    }
+  };
+  const container = useRef(null);
+  const hide = (e) => {
+    popReturn(false);
+  };
+
+  const stopHide = (e) => {
+    e.stopPropagation();
+  };
 
   return (
-    <div className="create-task">
-      <div className="create-task-container">
+    <div className="create-task" onClick={hide} ref={container}>
+      <div className="create-task-container" onClick={stopHide}>
         <div className="create-task-head">
           <span>Create Task</span>
           <i className="fa-solid fa-check-double"></i>
@@ -129,6 +168,7 @@ export default function CreateTask() {
               type="text"
               name="title"
               id="title"
+              ref={titleInput}
               onChange={(e) =>
                 setData((prevData) => ({
                   ...prevData,
@@ -136,6 +176,11 @@ export default function CreateTask() {
                 }))
               }
             />
+            {err && (
+              <span className="titleErr">
+                Please lengthen Title to more than 5 characters
+              </span>
+            )}
           </label>
           <div className="create-task-cluster">
             <div>
@@ -144,7 +189,6 @@ export default function CreateTask() {
             </div>
             <div className="due">
               <select
-                ref={dayElement}
                 id="day"
                 value={day}
                 onChange={(e) => setDay(e.target.value)}
@@ -177,7 +221,7 @@ export default function CreateTask() {
                 onChange={(e) =>
                   setData((prevData) => ({
                     ...prevData,
-                    name: e.target.value,
+                    time: e.target.value,
                   }))
                 }
               >
@@ -228,7 +272,7 @@ export default function CreateTask() {
           </label>
         </div>
         <div className="create-task-btn">
-          <div>Create</div>
+          <div onClick={submitTask}>Create</div>
         </div>
       </div>
     </div>

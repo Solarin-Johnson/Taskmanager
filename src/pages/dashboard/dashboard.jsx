@@ -6,6 +6,7 @@ import { TableList } from "./TableList";
 import CreateTask from "../createTask";
 export default function Dashboard() {
   const [quickTask, setQuickTask] = useState();
+  const [pop, setPop] = useState(false);
   const storedTasks = JSON.parse(localStorage.getItem("tasks")) || false;
   const [tasks, setTask] = useState(storedTasks);
   const storeStreak = localStorage.getItem("streak") || 0;
@@ -61,6 +62,12 @@ export default function Dashboard() {
   const qTask = (e) => {
     setQuickTask(e);
   };
+  const newPop = (e) => {
+    setPop(e);
+  };
+  const popReturn = (e) => {
+    setPop(e);
+  };
   return (
     <div className="dashboard">
       <Navbar />
@@ -69,16 +76,17 @@ export default function Dashboard() {
           points={completed.length * 3}
           streak={streak}
           progress={progress}
+          newPop={newPop}
         />
         <TableList quickTask={quickTask} />
         <QuickTask qTask={qTask} />
-        <CreateTask />
+        {pop && <CreateTask qTask={qTask} newPop={pop} popReturn={popReturn} />}
       </div>
     </div>
   );
 }
 
-export function UserCard({ progress, points, streak }) {
+export function UserCard({ progress, points, streak, newPop }) {
   const profile = useRef(null);
   const [browserWidth, setBrowserWidth] = useState(window.innerWidth);
 
@@ -138,7 +146,7 @@ export function UserCard({ progress, points, streak }) {
             <span>2</span>
           </div>
         </div>
-        <div className="usercard-tabs-new">
+        <div className="usercard-tabs-new" onClick={() => newPop(true)}>
           <span>New Task</span>
           <i className="fa-solid fa-plus"></i>
         </div>

@@ -25,15 +25,13 @@ export function TableList({ quickTask }) {
       const updatedTasks = [...tasks];
       updatedTasks.map((data, index) => {
         if (
-          (Number(data.monthIndex) <= Number(monthIndex) &&
+          (Number(data.monthIndex) <= Number(monthIndex) + 1 &&
             Number(data.dayIndex) < Number(dayIndex)) ||
-          Number(data.monthIndex) < Number(monthIndex)
+          Number(data.monthIndex) < Number(monthIndex) + 1
         ) {
-          console.log(dayIndex);
           updatedTasks.splice(index, 1);
           setTask(updatedTasks);
         }
-        console.log(data.dayIndex, data.monthIndex, monthIndex);
         return localStorage.setItem("tasks", JSON.stringify(updatedTasks));
       });
     } catch (error) {
@@ -45,7 +43,7 @@ export function TableList({ quickTask }) {
     tasks.map((data, index) => {
       if (
         Number(data.dayIndex) === Number(dayIndex) &&
-        Number(data.monthIndex) === Number(monthIndex)
+        Number(data.monthIndex) === Number(monthIndex) + 1
       ) {
         todayTable.push([data, index]);
       } else {

@@ -31,7 +31,7 @@ export default function Table({
         </div>
         <div className="table-items-name">{task}</div>
         <div
-          id={priority === "high" && "high_prior"}
+          id={(priority === "high" && "high_prior") || ""}
           className="table-items-priority"
         >
           <span>Priority</span>

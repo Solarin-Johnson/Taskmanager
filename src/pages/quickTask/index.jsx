@@ -20,7 +20,7 @@ export function QuickTask({ qTask }) {
           complete: false,
           date: todaysdate,
           dayIndex: dayIndex,
-          monthIndex: monthIndex,
+          monthIndex: Number(monthIndex) + 1,
         },
       ];
       localStorage.setItem("tasks", JSON.stringify(newTask));

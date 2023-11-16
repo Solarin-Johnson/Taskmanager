@@ -17,8 +17,8 @@
   &-container {
     width: 80vw;
     max-width: 400px;
-    max-height: 500px;
-    height: 90vh;
+    max-height: 535px;
+    height: 100%;
     border-radius: 15px;
     background-color: #333750;
     overflow-y: auto;
@@ -69,7 +69,7 @@
   }
   &-field {
     display: grid;
-    grid-template-rows: auto 40px;
+    grid-template-rows: auto 40px auto;
     row-gap: 8px;
     :first-child {
       font-size: 16px;
@@ -153,7 +153,7 @@
     }
   }
   &-btn {
-    padding: 20px 20px;
+    padding: 20px 20px 10px;
     display: grid;
     div {
       height: 50px;
@@ -165,8 +165,17 @@
       font-size: 20px;
       color: #fff;
       font-weight: 700;
+      cursor: pointer;
     }
   }
+}
+
+.titleErr {
+  color: #fe2b0a;
+  font-weight: 400;
+  height: auto;
+  max-height: 30px;
+  margin-top: -2px;
 }
 
 @media screen and (max-width: 600px) {
