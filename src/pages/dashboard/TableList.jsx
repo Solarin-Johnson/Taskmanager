@@ -25,8 +25,9 @@ export function TableList({ quickTask }) {
       const updatedTasks = [...tasks];
       updatedTasks.map((data, index) => {
         if (
-          Number(data.monthIndex) < Number(monthIndex) &&
-          Number(data.dayIndex) <= Number(dayIndex)
+          (Number(data.monthIndex) <= Number(monthIndex) &&
+            Number(data.dayIndex) < Number(dayIndex)) ||
+          Number(data.monthIndex) < Number(monthIndex)
         ) {
           console.log(dayIndex);
           updatedTasks.splice(index, 1);
