@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import Navbar from "../../components/navigation";
 import "./dashboard.scss";
-import { NewTask } from "../quickTask";
+import { QuickTask } from "../quickTask";
 import { TableList } from "./TableList";
+import CreateTask from "../createTask";
 export default function Dashboard() {
   const [quickTask, setQuickTask] = useState();
   const storedTasks = JSON.parse(localStorage.getItem("tasks")) || false;
@@ -18,6 +19,9 @@ export default function Dashboard() {
   if (!localStorage.getItem("first")) {
     localStorage.setItem("first", dayIndex);
   }
+  // if (!localStorage.getItem("points")) {
+  //   localStorage.setItem("points", 0);
+  // }
   var today = 0;
   try {
     tasks.map((data, index) => {
@@ -67,7 +71,8 @@ export default function Dashboard() {
           progress={progress}
         />
         <TableList quickTask={quickTask} />
-        <NewTask qTask={qTask} />
+        <QuickTask qTask={qTask} />
+        <CreateTask />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import "./newtask.scss";
 
-export function NewTask({ qTask }) {
+export function QuickTask({ qTask }) {
   const quickTaskValue = useRef(null);
   const quickTask = () => {
     const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];

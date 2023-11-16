@@ -1,0 +1,149 @@
+.create-task {
+  max-width: calc(100vw);
+  padding-left: 35px;
+  width: 100%;
+  height: 100%;
+  max-height: 100vh;
+  position: fixed;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  background-color: #2a2d4285;
+  top: 0;
+  left: 0;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  &-container {
+    width: 80vw;
+    max-width: 400px;
+    max-height: 500px;
+    height: 90vh;
+    border-radius: 15px;
+    background-color: #333750;
+    overflow-y: auto;
+    overflow-x: none;
+    align-content: start;
+    display: grid;
+    border: 5px solid #55596a;
+    color: #ffffff90;
+    grid-template-columns: 1fr;
+
+    &::-webkit-scrollbar {
+      background-color: transparent;
+      border-radius: 10px;
+      width: 4px;
+    }
+    &::-webkit-scrollbar-thumb {
+      width: 4px;
+      border-radius: 100rem;
+      background-color: #55596a;
+    }
+  }
+  &-head {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    padding: 20px 18px;
+    align-content: center;
+    font-weight: 700;
+    font-size: 20px;
+    color: #ffffffb7;
+
+    :nth-child(2) {
+      background-color: #473d74;
+      color: #ae97f8;
+      justify-self: end;
+      padding: 10px;
+      border-radius: 50%;
+      margin-top: -10px;
+      font-size: 16px;
+      display: grid;
+      align-items: center;
+      justify-items: center;
+    }
+  }
+  &-form {
+    padding: 5px 20px;
+    display: grid;
+    row-gap: 20px;
+  }
+  &-field {
+    display: grid;
+    grid-template-rows: auto 40px;
+    row-gap: 5px;
+    :first-child {
+      font-size: 16px;
+    }
+    input {
+      background-color: transparent;
+      border: 2px solid #ffffff35;
+      border-radius: 4px;
+      outline: none;
+      transition: 0.3s ease;
+      padding: 0 5px;
+      color: #ffffff90;
+      font-weight: 500;
+      font-size: 15px;
+      font-family: inherit;
+
+      &:focus {
+        border-color: #ae97f8;
+      }
+    }
+  }
+  &-cluster {
+    display: grid;
+    grid-template-rows: auto 35px;
+    row-gap: 5px;
+    :last-child {
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      column-gap: 30px;
+
+      select {
+        background-color: transparent;
+        color: #ffffff90;
+        overflow-x: hidden;
+        outline: none;
+        border: 2px solid #ffffff35;
+        border-radius: 4px;
+        transition: 0.3s ease;
+        padding: 0 5px;
+        font-weight: 500;
+        font-family: inherit;
+
+        &:focus {
+          border-color: #ae97f8;
+        }
+
+        &::-webkit-scrollbar-track {
+          background-color: #333750;
+        }
+        &::-webkit-scrollbar-thumb {
+          width: 4px;
+          border-radius: 100rem;
+          background-color: #55596a;
+        }
+      }
+      select option {
+        background-color: #333750;
+      }
+      select option:disabled {
+        color: #ae97f8;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .create-task {
+    padding-left: 0;
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  .create-task {
+    padding: 0 125px;
+  }
+}
