@@ -28,7 +28,7 @@ export default function Dashboard() {
     tasks.map((data, index) => {
       if (
         Number(data.dayIndex) === Number(dayIndex) &&
-        Number(data.monthIndex) === Number(monthIndex)
+        Number(data.monthIndex) === Number(monthIndex) + 1
       ) {
         today += 1;
         if (data.complete === true) {
@@ -45,6 +45,7 @@ export default function Dashboard() {
     localStorage.setItem("streak", Math.round(streakArray.length));
     setProgress(Math.round((streakArray.length / today) * 100));
     setStreak(Math.abs(dayIndex - Number(localStorage.getItem("first"))));
+    console.log(tasks.length);
   }, []);
 
   const completed = [];
