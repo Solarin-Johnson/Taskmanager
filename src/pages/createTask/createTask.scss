@@ -8,7 +8,7 @@
   z-index: 10;
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  background-color: #2a2d4285;
+  background-color: var(--trans-light);
   top: 0;
   left: 0;
   display: grid;
@@ -20,13 +20,13 @@
     max-height: 535px;
     height: 100%;
     border-radius: 15px;
-    background-color: #333750;
+    background-color: var(--primary-color);
     overflow-y: auto;
     overflow-x: none;
     align-content: start;
     display: grid;
-    border: 5px solid #55596a;
-    color: #ffffff90;
+    border: 5px solid #b7b9cd7d;
+    color: var(--text-color);
     grid-template-columns: 1fr;
 
     &::-webkit-scrollbar {
@@ -47,13 +47,13 @@
     align-content: center;
     font-weight: 700;
     font-size: 20px;
-    color: #ffffffb7;
+    color: var(--secondary-color);
 
     :nth-child(2) {
       background-color: #473d74;
       color: #ae97f8;
       justify-self: end;
-      padding: 10px;
+      padding: 10px 10.5px;
       border-radius: 50%;
       margin-top: -10px;
       font-size: 16px;
@@ -78,16 +78,17 @@
       align-items: center;
       justify-content: start;
       column-gap: 5px;
-      color: #ffffffb7;
+      color: var(--text-color);
+      font-weight: 700;
     }
     input {
       background-color: transparent;
-      border: 2px solid #ffffff35;
+      border: 2px solid var(--text-color);
       border-radius: 4px;
       outline: none;
       transition: 0.3s ease;
       padding: 0 5px;
-      color: #ffffff90;
+      color: var(--text-color);
       font-weight: 500;
       font-size: 15px;
       font-family: inherit;
@@ -102,12 +103,13 @@
     grid-template-rows: auto 35px;
     row-gap: 8px;
     :first-child {
+      font-weight: 700;
       display: grid;
       grid-template-columns: repeat(2, auto);
       align-items: center;
       justify-content: start;
       column-gap: 5px;
-      color: #ffffffb7;
+      color: var(--text-color);
 
       :last-child {
         width: 20px;
@@ -120,10 +122,10 @@
 
       select {
         background-color: transparent;
-        color: #ffffff90;
+        color: var(--text-color);
         overflow-x: hidden;
         outline: none;
-        border: 2px solid #ffffff35;
+        border: 2px solid var(--text-color);
         border-radius: 4px;
         transition: 0.3s ease;
         padding: 0 5px;
@@ -144,10 +146,11 @@
         }
       }
       select option {
-        background-color: #333750;
+        background-color: var(--primary-color);
+        font-weight: 600;
       }
       select option:disabled {
-        color: #ae97f8;
+        color: #7247ffdc;
         font-weight: 600;
       }
     }

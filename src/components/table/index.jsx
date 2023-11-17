@@ -63,7 +63,6 @@ export default function Table({
       </div>
     );
   } else {
-    console.log("false");
     return (
       <>
         <div className="table-items null">

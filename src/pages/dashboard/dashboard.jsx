@@ -23,17 +23,19 @@ export default function Dashboard() {
   // if (!localStorage.getItem("points")) {
   //   localStorage.setItem("points", 0);
   // }
-  var today = 0;
-
+  const [today, setToday] = useState([]);
   useEffect(() => {
     setTask(JSON.parse(localStorage.getItem("tasks")));
+  }, []);
+
+  useEffect(() => {
     try {
       tasks.map((data, index) => {
+        today.push(data);
         if (
           Number(data.dayIndex) === Number(dayIndex) &&
           Number(data.monthIndex) === Number(monthIndex) + 1
         ) {
-          today += 1;
           if (data.complete === true) {
             streakArray.push(data);
           }
@@ -43,16 +45,15 @@ export default function Dashboard() {
     } catch (error) {
       console.log(error);
     }
-  }, [JSON.parse(localStorage.getItem("tasks"))]);
+  }, []);
 
   useEffect(() => {
     try {
       localStorage.setItem("streak", Math.round(streakArray.length));
-      setProgress(Math.round((streakArray.length / today) * 100));
+      setProgress(Math.round((streakArray.length / today.length) * 100));
       setStreak(Math.abs(dayIndex - Number(localStorage.getItem("first"))));
-      console.log(tasks.length);
     } catch (error) {}
-  }, [JSON.parse(localStorage.getItem("tasks"))]);
+  }, []);
 
   const completed = [];
   try {
@@ -63,9 +64,7 @@ export default function Dashboard() {
       }
       return data;
     });
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 
   const qTask = (e) => {
     setQuickTask(e);

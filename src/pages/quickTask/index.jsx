@@ -10,7 +10,7 @@ export function QuickTask({ qTask }) {
     const todaysdate = new Intl.DateTimeFormat("en-US", options).format(today);
     const dayIndex = today.getDate().toString().padStart(2, "0");
     const monthIndex = today.getMonth().toString().padStart(2, "0");
-    if (quickTaskValue.current.value.length >= 4) {
+    if (quickTaskValue.current && quickTaskValue.current.value.length >= 4) {
       const newTask = [
         ...storedTasks,
         {

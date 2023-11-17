@@ -9,15 +9,13 @@ export function Menubar({ showMenu }) {
   const systemMenu = useRef(null);
   const [menuItems, setMenuItems] = useState(["", "", ""]);
   const [systemItems, setSystemItems] = useState([""]);
-  const [linkName, ] = useState([
+  const [linkName] = useState([
     "dashboard",
     "profit",
     "transactions",
     "invest",
     "refer",
   ]);
-
-  const [systemLink, ] = useState(["settings", "login"]);
 
   useEffect(() => {
     if (showMenu) {
@@ -44,12 +42,8 @@ export function Menubar({ showMenu }) {
     }
   }, [menuItems]);
 
-  const [menuIcons, ] = useState([
-    "home_app_logo",
-    "monitoring",
-    "settings",
-  ]);
-  const [systemIcons, ] = useState(["light_mode"]);
+  const [menuIcons] = useState(["home_app_logo", "monitoring", "settings"]);
+  const [systemIcons] = useState(["light_mode"]);
 
   const spread = () => {
     menuContainer.current.id = "spread";
@@ -77,6 +71,22 @@ export function Menubar({ showMenu }) {
       setMenuItems(["", "", ""]);
       setSystemItems([""]);
     }
+  };
+
+  const [lightMode, setLightMode] = useState(false);
+  useEffect(() => {}, [lightMode]);
+
+  const toggleMode = () => {
+    document.body.classList.toggle("light-mode");
+    if (lightMode) {
+      console.log("true");
+      setSystemItems(["Dark Mode"]);
+      unSpread();
+    } else {
+      setSystemItems(["Dark Mode"]);
+      unSpread();
+    }
+    setLightMode(!lightMode);
   };
 
   return (
@@ -109,9 +119,9 @@ export function Menubar({ showMenu }) {
         <div className="systemMenu" ref={systemMenu}>
           {systemItems.map((name, index) => (
             <Link
+              onClick={toggleMode}
               className="mainMenuItems"
               key={name + index}
-              to={`/${systemLink[index]}`}
             >
               <div className="mainMenuItemsIcon">
                 <span className="material-symbols-outlined">
@@ -161,10 +171,10 @@ export function Head({ showMenu }) {
   }, []);
 
   const [search, setSearch] = useState("");
-  const searchRef = useRef(null)
+  const searchRef = useRef(null);
   return (
     <>
-      <SearchTask search={search} searchRef={searchRef}/>
+      <SearchTask search={search} searchRef={searchRef} />
       <div className="dashboardHead">
         {browserWidth < 1240 && (
           <div ref={menuElement} className="headMenuBar" onClick={clickedMenu}>

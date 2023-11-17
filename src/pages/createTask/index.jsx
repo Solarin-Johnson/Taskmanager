@@ -120,7 +120,7 @@ export default function CreateTask({ qTask, newPop, popReturn }) {
     Dec: 12,
   };
   const submitTask = () => {
-    if (data.title.length <= 4) {
+    if (data && data.title.length <= 4) {
       setErr(true);
     } else {
       const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];

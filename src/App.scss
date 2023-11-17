@@ -1,19 +1,21 @@
-:root {
+body.light-mode {
   --primary-color: #fff;
   --secondary-color: #292c41;
   --accent-color: #292c41;
   --text-color: #292c41;
   --progress-color: #4a4769;
   --complete-color: #295b3c;
-
-  // --primary-color: #2b2e43;
-  // --secondary-color: #fff;
-  // --accent-color: #292c41;
-  // --text-color: #ffffff80;
-  // --progress-color: #c7b1ff;
-  // --complete-color: #b9ffb9;
+  --trans-light: #ffffff85;
 }
-
+:root {
+  --primary-color: #2b2e43;
+  --secondary-color: #fff;
+  --accent-color: #292c41;
+  --text-color: #ffffff80;
+  --progress-color: #c7b1ff;
+  --complete-color: #b9ffb9;
+  --trans-light: #2a2d4285;
+}
 ::-webkit-scrollbar {
   width: 6px;
 }
