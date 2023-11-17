@@ -43,14 +43,18 @@ export function Menubar({ showMenu }) {
   }, [menuItems]);
 
   const [menuIcons] = useState(["home_app_logo", "monitoring", "settings"]);
-  const [systemIcons] = useState(["light_mode"]);
+  const [systemIcons, setSystemIcons] = useState(["light_mode"]);
+
+  useEffect(() => {
+    setSystemIcons([(lightMode && "dark_mode") || "light_mode"]);
+  }, []);
 
   const spread = () => {
     menuContainer.current.id = "spread";
     menuContainer.current.parentElement.id = "spreadParent";
     // setTimeout(() => {
     setMenuItems(["Dashboard", "Task Insight", "Settings"]);
-    setSystemItems(["Light Mode"]);
+    setSystemItems([(lightMode && "Dark Mode") || "Light Mode"]);
   };
   const [browserWidth, setBrowserWidth] = useState(window.innerWidth);
   useEffect(() => {
@@ -74,19 +78,25 @@ export function Menubar({ showMenu }) {
   };
 
   const [lightMode, setLightMode] = useState(false);
-  useEffect(() => {}, [lightMode]);
-
-  const toggleMode = () => {
-    document.body.classList.toggle("light-mode");
-    if (lightMode) {
-      console.log("true");
-      setSystemItems(["Dark Mode"]);
-      unSpread();
+  useEffect(() => {
+    const storedMode = JSON.parse(localStorage.getItem("lightMode"));
+    if (storedMode === null) {
+      localStorage.setItem("lightMode", JSON.stringify(true));
+      setLightMode(storedMode);
     } else {
-      setSystemItems(["Dark Mode"]);
-      unSpread();
+      setLightMode(storedMode);
+      console.log(storedMode);
     }
+  }, []);
+
+  useEffect(() => {
+    setSystemIcons([(lightMode && "dark_mode") || "light_mode"]);
+    setSystemItems([(lightMode && "Dark Mode") || "Light Mode"]);
+    document.body.classList.toggle("light-mode");
+  }, [lightMode]);
+  const toggleMode = () => {
     setLightMode(!lightMode);
+    localStorage.setItem("lightMode", !lightMode);
   };
 
   return (
