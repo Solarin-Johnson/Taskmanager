@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./navigation.scss";
 import { Link } from "react-router-dom";
+import { SearchTask } from "../searchTask";
 
 export function Menubar({ showMenu }) {
   const menuContainer = useRef(null);
@@ -159,30 +160,35 @@ export function Head({ showMenu }) {
     };
   }, []);
 
+  const [search, setSearch] = useState("");
+
   return (
-    <div className="dashboardHead">
-      
-      {browserWidth < 1240 && (
-        <div ref={menuElement} className="headMenuBar" onClick={clickedMenu}>
-          <i className="fa-solid fa-bars"></i>{" "}
-        </div>
-      )}
-      <div className="top-header">
-        <label className="search">
-          <input
-            type="text"
-            name="search"
-            id="searchbox"
-            placeholder={"Search Task"}
-          />
-          <i className="fa-solid fa-magnifying-glass"></i>
-        </label>
-        <div className="notification">
-          <span className="notification-number">2</span>
-          <i className="fa-regular fa-bell"></i>
+    <>
+      <SearchTask search={search} />
+      <div className="dashboardHead">
+        {browserWidth < 1240 && (
+          <div ref={menuElement} className="headMenuBar" onClick={clickedMenu}>
+            <i className="fa-solid fa-bars"></i>{" "}
+          </div>
+        )}
+        <div className="top-header">
+          <label className="search">
+            <input
+              type="text"
+              name="search"
+              id="searchbox"
+              placeholder={"Search Task"}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <i className="fa-solid fa-magnifying-glass"></i>
+          </label>
+          <div className="notification">
+            <span className="notification-number">2</span>
+            <i className="fa-regular fa-bell"></i>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

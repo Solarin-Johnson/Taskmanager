@@ -10,7 +10,6 @@ export default function Table({
   i,
 }) {
   const [checked, setChecked] = useState(complete);
-  const storedTasks = JSON.parse(localStorage.getItem("tasks"));
 
   const check = () => {
     const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -51,9 +50,12 @@ export default function Table({
   } else {
     console.log("false");
     return (
-      <div className="table-items null">
-        No tasks available, Enjoy your day!{" "}
-      </div>
+      <>
+        <div className="table-items null">
+          <span></span>
+          No tasks available, Enjoy your day!{" "}
+        </div>
+      </>
     );
   }
 }

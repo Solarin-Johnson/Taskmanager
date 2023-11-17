@@ -3,7 +3,10 @@
   height: 50px;
   border-radius: 10px;
   background-color: #333750;
-  grid-template-columns: repeat(5, auto);
+  // grid-template-columns: repeat(5, auto);
+  grid-template-columns: auto 4fr auto auto auto;
+  justify-items: center;
+  column-gap: 20px;
   justify-content: space-between;
   align-content: center;
   align-items: center;
@@ -23,7 +26,7 @@
     font-size: 16px;
     transition: 0.5s ease;
     text-align-last: left;
-    width: 30vw;
+    // width: 30vw;
     max-width: 600px;
     justify-self: start;
   }
@@ -32,8 +35,8 @@
     display: grid;
     grid-template-columns: repeat(3, auto);
     column-gap: 10px;
-    width: auto;
-    min-width: 120px;
+    width: 100%;
+    // min-width: 120px;
     justify-content: start;
     align-content: center;
     align-items: center;
@@ -42,7 +45,7 @@
   }
   &-priority {
     color: #8761e6;
-    width: 150px;
+    // width: 150px;
   }
 
   &-status {
@@ -51,24 +54,25 @@
     padding: 7px 15px;
     border-radius: 10rem;
     font-weight: 600;
-    width: 80px;
+    // width: 80px;
     text-align: center;
   }
 }
 
 .table-items.null {
-  justify-content: center;
+  // width: 100%;
+  justify-items: center;
 }
 
 @media screen and (max-width: 920px) {
   .table-items {
     padding: 0 30px;
-    grid-template-columns: repeat(4, auto);
+    // grid-template-columns: repeat(4, auto);
 
     &-priority,
     &-time {
       grid-template-columns: repeat(2, auto);
-      min-width: 0;
+      min-width: 0px;
       width: 100%;
 
       :first-child {
@@ -76,7 +80,7 @@
       }
     }
     &-priority {
-      width: 70px;
+      // width: 70px;
       justify-self: start;
     }
     &-status {
@@ -100,10 +104,10 @@
 
 @media screen and (max-width: 600px) {
   .table-items {
-    padding: 0 25px;
+    padding: 0 20px;
     &-name {
-      max-width: calc(100vw - 190px);
-      width: 40vw;
+      // max-width: calc(100vw - 190px);
+      width: 100%;
       overflow-x: auto;
       text-overflow: clip;
     }
