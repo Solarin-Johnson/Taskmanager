@@ -49,7 +49,7 @@ export default function CreateTask({ qTask, newPop, popReturn }) {
     date: initDate,
     time: "1",
     xTime: "AM",
-    priority: "high",
+    priority: "High",
   });
   const [selectedDate, setSelectedDate] = useState("");
   const titleInput = useRef(null);

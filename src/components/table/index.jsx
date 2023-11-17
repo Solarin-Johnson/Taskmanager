@@ -31,12 +31,12 @@ export default function Table({
         </div>
         <div className="table-items-name">{task}</div>
         <div
-          id={(priority === "high" && "high_prior") || ""}
+          id={(priority === "High" && "high_prior") || ""}
           className="table-items-priority"
         >
           <span>Priority</span>
           <i className="fa-solid fa-fire-flame-curved"></i>
-          <span>{priority || "normal"}</span>
+          <span>{priority || "Normal"}</span>
         </div>
         <div className="table-items-time">
           <span>Time</span>

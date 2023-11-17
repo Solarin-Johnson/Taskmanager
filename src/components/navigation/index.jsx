@@ -161,6 +161,7 @@ export function Head({ showMenu }) {
 
   return (
     <div className="dashboardHead">
+      
       {browserWidth < 1240 && (
         <div ref={menuElement} className="headMenuBar" onClick={clickedMenu}>
           <i className="fa-solid fa-bars"></i>{" "}
