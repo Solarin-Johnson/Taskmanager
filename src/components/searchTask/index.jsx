@@ -1,10 +1,37 @@
+import { useEffect, useRef, useState } from "react";
 import Table from "../table";
 import "./searchTask.scss";
 
 export function SearchTask({ search }) {
-  if (search.length > 0) {
+  const searchBox = useRef(null);
+  const [hideBox, setHideBox] = useState(false);
+  const customBlur = (e) => {
+    if (
+      searchBox.current &&
+      e.target !== searchBox.current &&
+      !searchBox.current.contains(e.target)
+    ) {
+      setHideBox(true);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", customBlur);
+
+    return () => {
+      document.removeEventListener("click", customBlur);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (search.length > 0) {
+      setHideBox(false);
+    }
+  }, [search]);
+
+  if (search.length > 0 && !hideBox) {
     return (
-      <div className="search-task-container">
+      <div className="search-task-container" ref={searchBox}>
         <div className="search-task-head">
           <span>Search Result for</span> <span>{search}</span>
         </div>
@@ -18,8 +45,13 @@ export function SearchTask({ search }) {
 
 export function SearchResults({ search }) {
   const storedTasks = JSON.parse(localStorage.getItem("tasks"));
-  return storedTasks && storedTasks.length !== 0 ? (
-    storedTasks.map((task, index) => (
+  const searchResults = storedTasks.filter((task) =>
+    task.task.toLowerCase().includes(search.toLowerCase())
+  );
+  return storedTasks &&
+    storedTasks.length !== 0 &&
+    searchResults.length !== 0 ? (
+    searchResults.map((task, index) => (
       <Table
         key={index}
         task={task.task}
@@ -30,6 +62,10 @@ export function SearchResults({ search }) {
       />
     ))
   ) : (
-    <div className="table-items null">No tasks found </div>
+    <div className="table-items results-null">
+      <span></span>
+      <span>No tasks found</span>
+      <span></span>
+    </div>
   );
 }

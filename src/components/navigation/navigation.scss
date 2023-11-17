@@ -50,7 +50,8 @@
       justify-content: end;
       transition: 0.3s ease;
 
-      &:hover {
+      &:hover,
+      &:focus {
         width: 100%;
       }
 

@@ -41,14 +41,16 @@
     }
   }
   &-result {
-    height: 500px;
+    height: auto;
     padding-top: 20px;
     display: grid;
     align-content: start;
     row-gap: 15px;
     color: #ffffffdc;
 
-    .null {
+    .results-null {
+      display: grid;
+      grid-template-columns: 1fr;
       color: #ffffffdc;
     }
   }
