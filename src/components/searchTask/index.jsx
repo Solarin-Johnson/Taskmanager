@@ -2,14 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import Table from "../table";
 import "./searchTask.scss";
 
-export function SearchTask({ search }) {
+export function SearchTask({ search, searchRef }) {
   const searchBox = useRef(null);
   const [hideBox, setHideBox] = useState(false);
   const customBlur = (e) => {
     if (
       searchBox.current &&
       e.target !== searchBox.current &&
-      !searchBox.current.contains(e.target)
+      !searchBox.current.contains(e.target) &&
+      !searchRef.current.contains(e.target)
     ) {
       setHideBox(true);
     }

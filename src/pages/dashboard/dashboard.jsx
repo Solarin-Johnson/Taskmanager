@@ -24,29 +24,33 @@ export default function Dashboard() {
   //   localStorage.setItem("points", 0);
   // }
   var today = 0;
-  try {
-    tasks.map((data, index) => {
-      if (
-        Number(data.dayIndex) === Number(dayIndex) &&
-        Number(data.monthIndex) === Number(monthIndex) + 1
-      ) {
-        today += 1;
-        if (data.complete === true) {
-          streakArray.push(data);
+
+  useEffect(() => {
+    setTask(JSON.parse(localStorage.getItem("tasks")));
+    try {
+      tasks.map((data, index) => {
+        if (
+          Number(data.dayIndex) === Number(dayIndex) &&
+          Number(data.monthIndex) === Number(monthIndex) + 1
+        ) {
+          today += 1;
+          if (data.complete === true) {
+            streakArray.push(data);
+          }
         }
-      }
-      return data;
-    });
-  } catch (error) {
-    console.log(error);
-  }
+        return data;
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, [JSON.parse(localStorage.getItem("tasks"))]);
 
   useEffect(() => {
     localStorage.setItem("streak", Math.round(streakArray.length));
     setProgress(Math.round((streakArray.length / today) * 100));
     setStreak(Math.abs(dayIndex - Number(localStorage.getItem("first"))));
     console.log(tasks.length);
-  }, []);
+  }, [JSON.parse(localStorage.getItem("tasks"))]);
 
   const completed = [];
   try {

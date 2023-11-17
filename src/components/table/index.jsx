@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./table.scss";
 export default function Table({
   task,
@@ -19,9 +19,18 @@ export default function Table({
     newState[index].complete = !checked;
     localStorage.setItem("tasks", JSON.stringify(newState));
   };
+
+  const tableItems = useRef(null);
+  const deleteTask = () => {
+    const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    const newState = [...storedTasks];
+    newState.splice(index, 1);
+    localStorage.setItem("tasks", JSON.stringify(newState));
+    tableItems.current.style.display = "none";
+  };
   if (task) {
     return (
-      <div className="table-items">
+      <div className="table-items" ref={tableItems}>
         <div className="table-items-check" onClick={check}>
           <i
             id={(checked && "checked") || ""}
@@ -44,6 +53,12 @@ export default function Table({
         </div>
         <div id={(checked && "complete") || ""} className="table-items-status">
           {checked ? "Completed" : "In Progress"}
+        </div>
+        <div className="table-items-delete" onClick={deleteTask}>
+          <span
+            className="far fa-trash-can"
+            style={{ color: "#FF6347" }}
+          ></span>
         </div>
       </div>
     );

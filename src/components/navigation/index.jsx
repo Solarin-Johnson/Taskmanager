@@ -9,7 +9,7 @@ export function Menubar({ showMenu }) {
   const systemMenu = useRef(null);
   const [menuItems, setMenuItems] = useState(["", "", ""]);
   const [systemItems, setSystemItems] = useState([""]);
-  const [linkName, setLinkName] = useState([
+  const [linkName, ] = useState([
     "dashboard",
     "profit",
     "transactions",
@@ -17,7 +17,7 @@ export function Menubar({ showMenu }) {
     "refer",
   ]);
 
-  const [systemLink, setSystemLink] = useState(["settings", "login"]);
+  const [systemLink, ] = useState(["settings", "login"]);
 
   useEffect(() => {
     if (showMenu) {
@@ -44,12 +44,12 @@ export function Menubar({ showMenu }) {
     }
   }, [menuItems]);
 
-  const [menuIcons, setMenuIcons] = useState([
+  const [menuIcons, ] = useState([
     "home_app_logo",
     "monitoring",
     "settings",
   ]);
-  const [systemIcons, setSystemIcons] = useState(["light_mode"]);
+  const [systemIcons, ] = useState(["light_mode"]);
 
   const spread = () => {
     menuContainer.current.id = "spread";
@@ -161,10 +161,10 @@ export function Head({ showMenu }) {
   }, []);
 
   const [search, setSearch] = useState("");
-
+  const searchRef = useRef(null)
   return (
     <>
-      <SearchTask search={search} />
+      <SearchTask search={search} searchRef={searchRef}/>
       <div className="dashboardHead">
         {browserWidth < 1240 && (
           <div ref={menuElement} className="headMenuBar" onClick={clickedMenu}>
@@ -172,7 +172,7 @@ export function Head({ showMenu }) {
           </div>
         )}
         <div className="top-header">
-          <label className="search">
+          <label className="search" ref={searchRef}>
             <input
               type="text"
               name="search"

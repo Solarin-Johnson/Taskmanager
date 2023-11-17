@@ -3,15 +3,15 @@
     position: fixed;
     width: calc(80vw - 30px);
     max-width: 400px;
-    height: 100vw;
-    backdrop-filter: blur(12px);
-    background-color: #4a4c6a8c;
+    height: auto;
+    backdrop-filter: blur(20px);
+    background-color: #4a4c6ab0;
     border-radius: 5px;
-    max-height: 370px;
+    max-height: 350px;
     top: 60px;
     right: 9vw;
     z-index: 90;
-    padding: 15px;
+    padding: 20px 15px 30px 15px;
     overflow-y: scroll;
   }
   &-head {
@@ -52,6 +52,22 @@
       display: grid;
       grid-template-columns: 1fr;
       color: #ffffffdc;
+    }
+    .table-items {
+      padding: 0 20px;
+      grid-template-columns: auto 1fr auto auto auto;
+      &-status {
+        display: none;
+      }
+      &-priority,
+      &-time {
+        grid-template-columns: repeat(2, auto);
+        min-width: 0px;
+
+        :first-child {
+          display: none;
+        }
+      }
     }
   }
 }
