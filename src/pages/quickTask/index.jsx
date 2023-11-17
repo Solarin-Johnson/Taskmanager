@@ -10,7 +10,7 @@ export function QuickTask({ qTask }) {
     const todaysdate = new Intl.DateTimeFormat("en-US", options).format(today);
     const dayIndex = today.getDate().toString().padStart(2, "0");
     const monthIndex = today.getMonth().toString().padStart(2, "0");
-    if (quickTaskValue.current.value.length >= 5) {
+    if (quickTaskValue.current.value.length >= 4) {
       const newTask = [
         ...storedTasks,
         {
@@ -41,6 +41,7 @@ export function QuickTask({ qTask }) {
           maxLength={100}
         />
       </div>
+      <span className="err">Lengthen task to more than 3 Characters </span>
 
       <div className="newtask-submit" onClick={quickTask}>
         Create Task

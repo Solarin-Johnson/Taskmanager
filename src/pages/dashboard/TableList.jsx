@@ -62,7 +62,7 @@ export function TableList({ quickTask }) {
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem("tasks")) || false;
     setTask(storedTasks);
-  }, [JSON.parse(localStorage.getItem("tasks"))]);
+  }, []);
 
   return (
     <div className="table-wrapper">

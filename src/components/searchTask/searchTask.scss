@@ -4,8 +4,8 @@
     width: calc(80vw - 30px);
     max-width: 400px;
     height: auto;
-    backdrop-filter: blur(20px);
-    background-color: #4a4c6ab0;
+    backdrop-filter: blur(15px);
+    background-color: #4a4c6a4e;
     border-radius: 5px;
     max-height: 350px;
     top: 60px;
@@ -13,6 +13,7 @@
     z-index: 90;
     padding: 20px 15px 30px 15px;
     overflow-y: scroll;
+    box-shadow: 0 5px 10px #00000044;
   }
   &-head {
     color: #ffffffdc;
@@ -50,14 +51,27 @@
 
     .results-null {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr !important;
       color: #ffffffdc;
     }
     .table-items {
       padding: 0 20px;
       grid-template-columns: auto 1fr auto auto auto;
+      &-delete {
+        display: none;
+      }
       &-status {
         display: none;
+      }
+      &-check {
+        visibility: hidden;
+        width: 0;
+      }
+      &-name {
+        margin-left: -20px;
+      }
+      &-time {
+        margin-right: -20px;
       }
       &-priority,
       &-time {

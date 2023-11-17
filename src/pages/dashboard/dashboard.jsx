@@ -7,12 +7,12 @@ import CreateTask from "../createTask";
 export default function Dashboard() {
   const [quickTask, setQuickTask] = useState();
   const [pop, setPop] = useState(false);
-  const storedTasks = JSON.parse(localStorage.getItem("tasks")) || false;
+  const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
   const [tasks, setTask] = useState(storedTasks);
   const storeStreak = localStorage.getItem("streak") || 0;
 
   const [streak, setStreak] = useState(storeStreak);
-  const [progress, setProgress] = useState(storeStreak);
+  const [progress, setProgress] = useState("");
   const streakArray = [];
   const currentDate = new Date();
   const dayIndex = currentDate.getDate().toString().padStart(2, "0");
@@ -43,20 +43,23 @@ export default function Dashboard() {
     } catch (error) {
       console.log(error);
     }
-  }, [JSON.parse(localStorage.getItem("tasks"))]);
+  }, []);
 
   useEffect(() => {
-    localStorage.setItem("streak", Math.round(streakArray.length));
-    setProgress(Math.round((streakArray.length / today) * 100));
-    setStreak(Math.abs(dayIndex - Number(localStorage.getItem("first"))));
-    console.log(tasks.length);
-  }, [JSON.parse(localStorage.getItem("tasks"))]);
+    try {
+      localStorage.setItem("streak", Math.round(streakArray.length));
+      setProgress(Math.round((streakArray.length / today) * 100));
+      setStreak(Math.abs(dayIndex - Number(localStorage.getItem("first"))));
+      console.log(tasks.length);
+    } catch (error) {}
+  }, []);
 
   const completed = [];
   try {
     tasks.map((data, i) => {
-      if (data.complete === true) {
+      if (data.complete) {
         completed.push(data);
+        console.log(completed);
       }
       return data;
     });
@@ -78,8 +81,10 @@ export default function Dashboard() {
       <Navbar />
       <div className="dashboard-container">
         <UserCard
-          points={completed.length * 3}
-          streak={streak}
+          points={(completed && completed.length * 3) || 0}
+          streak={streak || 0}
+          all={(tasks && tasks.length) || 0}
+          completed={completed && completed.length}
           progress={progress}
           newPop={newPop}
         />
@@ -91,7 +96,7 @@ export default function Dashboard() {
   );
 }
 
-export function UserCard({ progress, points, streak, newPop }) {
+export function UserCard({ progress, points, streak, newPop, all, completed }) {
   const profile = useRef(null);
   const [browserWidth, setBrowserWidth] = useState(window.innerWidth);
 
@@ -141,14 +146,14 @@ export function UserCard({ progress, points, streak, newPop }) {
         <div className="usercard-tabs-filter">
           <div className={`${activeFilter[0]} all`} onClick={filterAll}>
             <span>All</span>
-            <span>8</span>
+            <span>{all || 0}</span>
           </div>
           <div
             className={`${activeFilter[1]} important`}
             onClick={filterImportant}
           >
-            <span>Important</span>
-            <span>2</span>
+            <span>Completed</span>
+            <span>{completed || 0}</span>
           </div>
         </div>
         <div className="usercard-tabs-new" onClick={() => newPop(true)}>

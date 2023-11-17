@@ -59,7 +59,6 @@ export function SearchResults({ search }) {
         priority={task.priority}
         complete={task.complete}
         time={task.time}
-        index={index}
       />
     ))
   ) : (
