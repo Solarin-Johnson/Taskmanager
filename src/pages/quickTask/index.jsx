@@ -15,7 +15,7 @@ export function QuickTask({ qTask }) {
         ...storedTasks,
         {
           task: quickTaskValue.current.value,
-          priority: "normal",
+          priority: "Normal",
           time: "Soon",
           complete: false,
           date: todaysdate,
