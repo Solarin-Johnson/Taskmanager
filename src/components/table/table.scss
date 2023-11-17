@@ -2,7 +2,8 @@
   display: grid;
   height: 50px;
   border-radius: 10px;
-  background-color: #333750;
+  background-color: #ffffff09;
+  box-shadow: 0 0 10px #33375025;
   // grid-template-columns: repeat(5, auto);
   grid-template-columns: auto 4fr auto auto auto auto;
   justify-items: center;
@@ -12,11 +13,12 @@
   align-items: center;
   padding: 0 50px;
   font-size: 15px;
+  font-weight: 600;
   &-check {
     font-size: 24px;
     align-self: center;
     justify-self: start;
-    color: #ffffff80;
+    color: var(--text-color);
     cursor: pointer;
   }
   &-name {
@@ -40,7 +42,7 @@
     justify-content: start;
     align-content: center;
     align-items: center;
-    color: #ffffff80;
+    color: var(--text-color);
     transition: 0.5s ease;
   }
   &-priority {
@@ -49,8 +51,8 @@
   }
 
   &-status {
-    background-color: #8761e657;
-    color: #c7b1ff;
+    background-color: #a68fe034;
+    color: var(--progress-color);
     padding: 6px 15px;
     border-radius: 10rem;
     font-weight: 600;
@@ -96,7 +98,7 @@
 
 #complete {
   background-color: #00ff0030;
-  color: #b9ffb9;
+  color: var(--complete-color);
 }
 
 #checked {

@@ -21,10 +21,10 @@
   grid-template-columns: repeat(2, auto);
   column-gap: 40px;
   font-size: 24px;
-  color: #ffffff90;
+  color: var(--text-color);
   font-weight: 600;
   overflow: hidden;
-  background-color: #2a2d42;
+  background-color: var(--primary-color);
 
   .top-header {
     display: grid;
@@ -37,7 +37,7 @@
     padding-right: 20px;
     column-gap: 40px;
     font-size: 20px;
-    color: #ffffff90;
+    color: var(--text-color);
 
     .search {
       display: grid;
@@ -68,12 +68,12 @@
         background-color: transparent;
         padding: 0 10px;
         font-size: 16px;
-        color: #fff;
+        color: var(--text-color);
         outline: none;
         border: 2px solid transparent;
 
         &:focus {
-          border-color: #ffffff25;
+          border-color: var(--text-color);
         }
       }
     }
@@ -109,7 +109,7 @@
   width: 30px;
   font-size: 25px;
   cursor: pointer;
-  color: #ffffff90;
+  color: var(--text-color);
 }
 
 .mainMenu span {
@@ -118,7 +118,6 @@
 
 .dashboardMenu {
   overflow-y: hidden;
-  color: #00342a;
   position: fixed;
   width: 50px;
   height: calc(100vh - 0px);
@@ -132,12 +131,11 @@
   grid-template-columns: 1fr;
   row-gap: 10px;
   grid-template-rows: 50px auto auto;
-  box-shadow: 1.5px 0 0px #ffffff20;
+  box-shadow: 1.5px 0 0px #7d7d7d23;
   z-index: 90;
-  background-color: #2a2d42;
+  background-color: var(--primary-color);
 
   .logo {
-    color: #fff;
     padding-top: 20px;
 
     display: grid;
@@ -172,7 +170,7 @@
     width: 95%;
     justify-self: start;
     text-decoration: none;
-    color: #ffffffd8;
+    color: var(--text-color);
     align-items: center !important;
     display: grid !important;
     height: 100% !important;
@@ -196,12 +194,12 @@
     background-color: transparent;
   }
   .systemMenu {
-    border-top: 1px solid #ffffff26;
+    border-top: 1px solid #7b7b7b;
   }
 }
 
 .mainMenuItemsIcon.activeMenu {
-  background-color: #dbf2ee !important;
+  // background-color: #dbf2ee !important;
 }
 
 .mainMenuItemsIcon {
@@ -231,7 +229,7 @@
   a {
     justify-self: start;
     width: 95%;
-    color: #ffffffee;
+    color: var(--text-color);
     text-decoration: none;
     transition: 0.5s ease all;
   }

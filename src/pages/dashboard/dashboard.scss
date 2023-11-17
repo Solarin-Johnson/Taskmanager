@@ -4,6 +4,7 @@
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: auto 1fr;
+  background-color: var(--primary-color);
 
   &-container {
     display: grid;
@@ -18,7 +19,9 @@
 .usercard {
   grid-column: 1/5;
   grid-row: 1/6;
-  background-color: #333750;
+  background-color: #ffffff08;
+  // border: 5px solid #33375078;
+  box-shadow: 0 3px 10px #33375030;
   border-radius: 10px;
   display: grid;
   grid-template-columns: 1fr;
@@ -48,13 +51,13 @@
     // height: 100%;
     margin-left: 20px;
     font-size: 28px;
-    color: #fff;
-    font-weight: 600;
+    color: var(--secondary-color);
+    font-weight: 700;
     // align-self: last baseline;
     // padding-bottom: 10px;
   }
   &-progress {
-    background-color: #d2c4ff26;
+    background-color: #7f789470;
     grid-column: 4/10;
     grid-row: 8/13;
     height: 35px;
@@ -69,7 +72,7 @@
       position: absolute;
       align-self: center;
       justify-self: center;
-      color: #fff;
+      color: var(--secondary-color);
       font-size: 16px;
       font-weight: 600;
     }
@@ -92,7 +95,7 @@
   &-streak {
     justify-self: end;
     width: 100%;
-    background-color: #d2c4ff26;
+    background-color: #63636370;
     padding: 6px 4px;
     height: 25px;
     max-width: 60px;
@@ -109,7 +112,7 @@
       display: grid;
       align-items: center;
       align-content: center;
-      color: #fff;
+      color: var(--text-color);
       text-align: left;
       font-weight: 600;
       // width: 100%;
@@ -134,12 +137,12 @@
   &-points {
     i {
       color: #aa8dfc;
-      background-color: #20194564;
+      background-color: #343054;
     }
   }
   &-streak {
     i {
-      background-color: #ffa6003c;
+      background-color: #907868;
       color: orange;
       width: 15.75px;
     }
@@ -148,11 +151,11 @@
     align-self: last baseline;
     padding-top: 15px;
     // margin-top: 12px;
-    border-top: 2px solid #ffffff1b;
+    border-top: 2px solid #87878731;
     display: grid;
     grid-template-columns: auto 1fr auto;
     justify-items: center;
-    color: #ffffff90;
+    color: var(--text-color);
     align-items: center;
     align-content: center;
     font-weight: 600;
@@ -167,7 +170,7 @@
       display: grid;
       grid-template-columns: repeat(2, auto);
       // column-gap: 25px;
-      justify-content: space-evenly;
+      justify-content: space-between;
       max-width: 300px;
       width: 100%;
 
@@ -181,12 +184,15 @@
       div :last-child {
         padding: 0 10px;
         border-radius: 10rem;
-        background-color: #d2c4ff26;
+        background-color: #2a2d42;
+        color: #fff;
       }
     }
 
     &-new {
-      background-color: #d2c4ff26;
+      margin-right: -3px;
+      margin-left: 5px;
+      background-color: #5e548841;
       padding: 5px 5px 5px 10px;
       border-radius: 10rem;
       display: grid;
@@ -195,11 +201,12 @@
       justify-items: center;
       text-align: center;
       cursor: pointer;
+      color: var(--text-color);
 
       :last-child {
         margin-left: 10px;
         padding: 5px 6px;
-        border: 2px solid #ffffff1b;
+        border: 2px solid #63636399;
         border-radius: 50%;
         justify-content: center;
       }
@@ -229,7 +236,7 @@
     grid-column: span 12;
     margin-top: 20px;
     border-radius: 10px;
-    color: #fff;
+    color: var(--text-color);
     padding: 10px 0;
     display: grid;
     align-content: start;
@@ -250,9 +257,11 @@
     justify-content: start;
     align-items: center;
     column-gap: 10px;
+    font-weight: 700;
 
     :last-child {
       background-color: #3b405b;
+      color: #fff;
       width: 30px;
       font-size: 12px;
       font-weight: 600;
@@ -262,10 +271,12 @@
     }
   }
   &-date {
+    font-weight: 700;
     :last-child {
+      font-weight: 500;
       font-size: 15px;
       padding-left: 10px;
-      color: #ffffff80;
+      color: var(--text-color);
     }
   }
   &-container {
@@ -326,6 +337,12 @@
 
 .active-filter {
   color: #a07bff !important;
+  font-weight: 700;
+
+  :last-child {
+    font-weight: 600;
+    margin-left: 3px;
+  }
 }
 
 @media screen and (max-width: 1240px) {
