@@ -43,7 +43,7 @@ export default function Dashboard() {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [JSON.parse(localStorage.getItem("tasks"))]);
 
   useEffect(() => {
     try {
@@ -52,7 +52,7 @@ export default function Dashboard() {
       setStreak(Math.abs(dayIndex - Number(localStorage.getItem("first"))));
       console.log(tasks.length);
     } catch (error) {}
-  }, []);
+  }, [JSON.parse(localStorage.getItem("tasks"))]);
 
   const completed = [];
   try {

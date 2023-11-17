@@ -26,7 +26,7 @@ export default function Table({
     const newState = [...storedTasks];
     newState.splice(index, 1);
     localStorage.setItem("tasks", JSON.stringify(newState));
-    tableItems.current.style.display = "none";
+    window.location.reload();
   };
   if (task) {
     return (
