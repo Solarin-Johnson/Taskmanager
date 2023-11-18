@@ -22,14 +22,14 @@
     cursor: pointer;
   }
   &-name {
-    overflow: hidden;
-    text-overflow: ellipsis;
+    overflow-x: auto;
     white-space: nowrap;
     font-size: 16px;
     transition: 0.5s ease;
     text-align-last: left;
     // width: 30vw;
-    max-width: 600px;
+    max-width: 500px;
+    min-width: 100%;
     justify-self: start;
   }
   &-priority,
@@ -83,7 +83,7 @@
 }
 
 .table-items.in-viewport {
-  animation: slide 0.6s forwards 0.3s;
+  animation: slide 0.6s forwards 0.4s;
   transform: translateY(0);
   opacity: 0;
 }
@@ -98,19 +98,22 @@
   .table-items {
     padding: 0 20px;
     grid-template-columns: auto 1fr auto auto auto;
-
+    &-name {
+      max-width: none;
+      width: 100%;
+      overflow-x: auto;
+      text-overflow: clip;
+    }
     &-priority,
     &-time {
       grid-template-columns: repeat(2, auto);
       min-width: 0px;
       width: 100%;
-
       :first-child {
         display: none;
       }
     }
     &-priority {
-      // width: 70px;
       justify-self: start;
     }
     &-status {
@@ -138,6 +141,7 @@
     column-gap: 20px;
 
     &-name {
+      opacity: 0;
       // max-width: calc(100vw - 190px);
       width: 100%;
       overflow-x: auto;
@@ -164,4 +168,10 @@
       overflow: hidden;
     }
   }
+}
+
+.table-items-name::-webkit-scrollbar {
+  background-color: transparent;
+  border-radius: 10px;
+  height: 5px;
 }

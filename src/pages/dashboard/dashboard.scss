@@ -2,7 +2,7 @@
   max-width: 100vw;
   height: auto;
   display: grid;
-  grid-template-rows: 1fr;
+  grid-template-rows: auto;
   grid-template-columns: auto 1fr;
   background-color: var(--primary-color);
 
@@ -41,7 +41,7 @@
     grid-row: span 12;
     grid-column: 1/4;
     border-radius: 100%;
-    background-color: var(--primary-color);
+    background-color: #00000020;
     max-width: 150px;
     align-self: center;
   }

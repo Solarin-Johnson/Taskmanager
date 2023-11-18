@@ -3,7 +3,8 @@ body {
   font-family: 'Nunito', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #fff;
+  background-color: var(--primary-color);
+  padding: 0;
   /* background-color: #2B2E43; */
 }
 
