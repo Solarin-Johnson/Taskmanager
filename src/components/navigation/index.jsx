@@ -94,6 +94,7 @@ export function Menubar({ showMenu }) {
     setSystemItems([(lightMode && "Dark Mode") || "Light Mode"]);
     document.body.classList.toggle("light-mode");
   }, [lightMode]);
+  
   const toggleMode = () => {
     setLightMode(!lightMode);
     localStorage.setItem("lightMode", !lightMode);

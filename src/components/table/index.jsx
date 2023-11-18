@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import "./table.scss";
+import { useInView } from "react-intersection-observer";
 export default function Table({
   task,
   status,
@@ -11,6 +12,14 @@ export default function Table({
 }) {
   const [checked, setChecked] = useState(complete);
 
+  const [tableItems, inView] = useInView({
+    triggerOnce: true,
+  });
+
+  const [itemsNull, nullInView] = useInView({
+    triggerOnce: true,
+  });
+
   const check = () => {
     const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
     console.log(index);
@@ -20,7 +29,6 @@ export default function Table({
     localStorage.setItem("tasks", JSON.stringify(newState));
   };
 
-  const tableItems = useRef(null);
   const deleteTask = () => {
     const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
     const newState = [...storedTasks];
@@ -30,7 +38,10 @@ export default function Table({
   };
   if (task) {
     return (
-      <div className="table-items" ref={tableItems}>
+      <div
+        className={`table-items ${inView ? "in-viewport" : ""}`}
+        ref={tableItems}
+      >
         <div className="table-items-check" onClick={check}>
           <i
             id={(checked && "checked") || ""}
@@ -65,7 +76,10 @@ export default function Table({
   } else {
     return (
       <>
-        <div className="table-items null">
+        <div
+          className={`table-items null ${nullInView ? "in-viewport" : ""}`}
+          ref={itemsNull}
+        >
           <span></span>
           No tasks available, Enjoy your day!{" "}
         </div>
