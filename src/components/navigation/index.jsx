@@ -74,6 +74,7 @@ export function Menubar({ showMenu }) {
       menuContainer.current.parentElement.id = "";
       setMenuItems(["", "", ""]);
       setSystemItems([""]);
+      setSystemIcons([(lightMode && "dark_mode") || "light_mode"]);
     }
   };
 
@@ -92,6 +93,7 @@ export function Menubar({ showMenu }) {
   useEffect(() => {
     setSystemIcons([(lightMode && "dark_mode") || "light_mode"]);
     setSystemItems([(lightMode && "Dark Mode") || "Light Mode"]);
+    unSpread();
     document.body.classList.toggle("light-mode");
   }, [lightMode]);
 
@@ -114,7 +116,7 @@ export function Menubar({ showMenu }) {
         <div className="mainMenu" ref={mainMenu}>
           {menuItems.map((name, index) => (
             <Link
-              to={`/${linkName[index]}`}
+              // to={`Taskmanager/${linkName[index]}`}
               className="mainMenuItems"
               key={name + index.toString()}
             >
@@ -129,7 +131,7 @@ export function Menubar({ showMenu }) {
         </div>
         <div className="systemMenu" ref={systemMenu}>
           {systemItems.map((name, index) => (
-            <Link
+            <div
               onClick={toggleMode}
               className="mainMenuItems"
               key={name + index}
@@ -140,7 +142,7 @@ export function Menubar({ showMenu }) {
                 </span>
               </div>
               <div className="mainMenuItemsText">{name}</div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>
