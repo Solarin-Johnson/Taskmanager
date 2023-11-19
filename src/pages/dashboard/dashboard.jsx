@@ -122,7 +122,9 @@ export function UserCard({ progress, points, streak, newPop, all, completed }) {
     >
       <div className="usercard-details">
         <div className="usercard-profile" ref={profile}></div>
-        <div className="usercard-top">Hi Solarin</div>
+        <div className="usercard-top">
+          Hi Solarin <span className="far fa-pen-to-square"></span>
+        </div>
         <div className="usercard-progress">
           <span>{progress || 0}%</span>
           <div

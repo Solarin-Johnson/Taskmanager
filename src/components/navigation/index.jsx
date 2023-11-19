@@ -97,7 +97,7 @@ export function Menubar({ showMenu }) {
 
   const toggleMode = () => {
     setLightMode(!lightMode);
-    localStorage.setItem("lightMode", lightMode);
+    localStorage.setItem("lightMode", !lightMode);
   };
 
   return (
