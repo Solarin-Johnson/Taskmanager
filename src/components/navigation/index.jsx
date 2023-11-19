@@ -81,7 +81,7 @@ export function Menubar({ showMenu }) {
   useEffect(() => {
     const storedMode = JSON.parse(localStorage.getItem("lightMode"));
     if (storedMode === null) {
-      localStorage.setItem("lightMode", JSON.stringify(true));
+      localStorage.setItem("lightMode", JSON.stringify(false));
       setLightMode(storedMode);
     } else {
       setLightMode(storedMode);
@@ -94,10 +94,10 @@ export function Menubar({ showMenu }) {
     setSystemItems([(lightMode && "Dark Mode") || "Light Mode"]);
     document.body.classList.toggle("light-mode");
   }, [lightMode]);
-  
+
   const toggleMode = () => {
     setLightMode(!lightMode);
-    localStorage.setItem("lightMode", !lightMode);
+    localStorage.setItem("lightMode", lightMode);
   };
 
   return (
