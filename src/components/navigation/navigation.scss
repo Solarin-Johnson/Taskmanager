@@ -3,8 +3,9 @@
   width: 50px;
   position: relative;
   display: grid;
-  height: auto;
-  height: calc(100vh);
+  height: 100%;
+  max-height: calc(100vh);
+  transition: 0.5s ease;
 }
 
 .dashboardHead {
@@ -120,7 +121,8 @@
   overflow-y: hidden;
   position: fixed;
   width: 50px;
-  height: calc(100vh - 0px);
+  max-height: calc(100vh - 0px);
+  height: 100%;
   top: 0;
   left: 0;
   transition: 0.2s ease-in all;
