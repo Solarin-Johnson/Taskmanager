@@ -132,7 +132,7 @@ export default function CreateTask({ qTask, newPop, popReturn }) {
         date: data.date,
       });
       localStorage.setItem("tasks", JSON.stringify(storedTasks));
-      qTask(storedTasks);
+      qTask(newTask);
       popReturn(false);
     }
   };

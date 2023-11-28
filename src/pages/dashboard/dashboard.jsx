@@ -9,34 +9,17 @@ export default function Dashboard() {
   const [quickTask, setQuickTask] = useState();
   const [pop, setPop] = useState(false);
   const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  const [tasks, setTask] = useState(storedTasks);
-  const storeStreak = localStorage.getItem("streak") || 0;
-
-  const [streak, setStreak] = useState(storeStreak);
-  const [progress, setProgress] = useState("");
-  const streakArray = [];
+  const todayTasks = JSON.parse(localStorage.getItem("Today")) || [];
+  const [newAction, setNewAction] = useState("");
+  const game = JSON.parse(localStorage.getItem("game")) || [];
+  const [completed, setCompleted] = useState(game.completed);
+  const [streak, setStreak] = useState([game.streak]);
   FetchTask();
-
-  // if (!localStorage.getItem("first")) {
-  //   localStorage.setItem("first", dayIndex);
-  // }
-  // // if (!localStorage.getItem("points")) {
-  // //   localStorage.setItem("points", 0);
-  // // }
-  const [today, setToday] = useState([]);
   useEffect(() => {
-    setTask(JSON.parse(localStorage.getItem("tasks")));
-  }, []);
-
-  const completed = [];
-  try {
-    tasks.map((data, i) => {
-      if (data.complete) {
-        completed.push(data);
-      }
-      return data;
-    });
-  } catch (error) {}
+    const game = JSON.parse(localStorage.getItem("game")) || [];
+    setCompleted(game.completed);
+    setStreak(game.streak);
+  }, [newAction]);
 
   const qTask = (e) => {
     setQuickTask(e);
@@ -47,19 +30,26 @@ export default function Dashboard() {
   const popReturn = (e) => {
     setPop(e);
   };
+  const action = (e) => {
+    setNewAction(e);
+  };
+
   return (
     <div className="dashboard">
       <Navbar />
       <div className="dashboard-container">
         <UserCard
-          points={(completed && completed.length * 3) || 0}
-          streak={streak || 0}
-          all={(tasks && tasks.length) || 0}
-          completed={completed && completed.length}
-          progress={progress}
+          name={storedTasks.name}
+          all={storedTasks.tasks && storedTasks.tasks.length}
+          points={storedTasks.tasks && storedTasks.tasks.length * 2}
+          streak={streak.length}
+          completed={completed.length}
+          progress={
+            storedTasks.tasks && (completed.length / todayTasks.length) * 100
+          }
           newPop={newPop}
         />
-        <TableList quickTask={quickTask} />
+        <TableList quickTask={quickTask} setAction={action} />
         <QuickTask qTask={qTask} />
         {pop && <CreateTask qTask={qTask} newPop={pop} popReturn={popReturn} />}
       </div>
@@ -67,7 +57,15 @@ export default function Dashboard() {
   );
 }
 
-export function UserCard({ progress, points, streak, newPop, all, completed }) {
+export function UserCard({
+  name,
+  progress,
+  points,
+  streak,
+  newPop,
+  all,
+  completed,
+}) {
   const profile = useRef(null);
   const [browserWidth, setBrowserWidth] = useState(window.innerWidth);
 

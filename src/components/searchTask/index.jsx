@@ -46,7 +46,7 @@ export function SearchTask({ search, searchRef }) {
 
 export function SearchResults({ search }) {
   const storedTasks = JSON.parse(localStorage.getItem("tasks"));
-  const searchResults = storedTasks.filter((task) =>
+  const searchResults = storedTasks.tasks.filter((task) =>
     task.task.toLowerCase().includes(search.toLowerCase())
   );
   return storedTasks &&

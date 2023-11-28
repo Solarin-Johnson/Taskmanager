@@ -11,17 +11,15 @@ export function QuickTask({ qTask }) {
     const dayIndex = today.getDate().toString().padStart(2, "0");
     const monthIndex = today.getMonth().toString().padStart(2, "0");
     if (quickTaskValue.current && quickTaskValue.current.value.length >= 4) {
-      const newTask = [
-        storedTasks,
-        {
-          task: quickTaskValue.current.value,
-          priority: "Normal",
-          time: "Soon",
-          complete: false,
-          date: todaysdate,
-        },
-      ];
-      localStorage.setItem("tasks", JSON.stringify(newTask));
+      const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      const newTask = storedTasks.tasks.push({
+        task: quickTaskValue.current.value,
+        priority: "Normal",
+        time: "Soon",
+        complete: false,
+        date: todaysdate,
+      });
+      localStorage.setItem("tasks", JSON.stringify(storedTasks));
       qTask(newTask);
     }
   };

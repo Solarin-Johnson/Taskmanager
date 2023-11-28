@@ -29,7 +29,7 @@ export default function Table({
     storedTasks.tasks[index].complete = !checked;
     localStorage.setItem("tasks", JSON.stringify(newState));
     FetchTask();
-    action("check task");
+    action(index + checked);
   };
 
   const deleteTask = () => {
@@ -39,7 +39,7 @@ export default function Table({
     newState.tasks.splice(index, 1);
     localStorage.setItem("tasks", JSON.stringify(newState));
     FetchTask();
-    action("deleted task");
+    action(index + "deleted");
   };
   if (task) {
     return (

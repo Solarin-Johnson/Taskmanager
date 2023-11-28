@@ -125,7 +125,7 @@
   height: 100%;
   top: 0;
   left: 0;
-  transition: 0.2s ease-in all;
+  transition: 0.2s ease-in width;
   overflow-x: hidden;
   padding: 0px 10px 0px;
   display: grid;
@@ -188,9 +188,6 @@
   .activeMenu {
     background-color: #2a2d42;
   }
-  .activeMenu:hover {
-    // background-color: #dbf2ee;
-  }
 
   .mainMenuItemsIcon {
     background-color: transparent;
@@ -198,10 +195,6 @@
   .systemMenu {
     border-top: 1px solid #7b7b7b;
   }
-}
-
-.mainMenuItemsIcon.activeMenu {
-  // background-color: #dbf2ee !important;
 }
 
 .mainMenuItemsIcon {
@@ -212,9 +205,9 @@
   overflow: hidden;
   text-align: center;
   width: 22px;
-}
-.mainMenuItemsIcon:hover {
-  background-color: #40326b;
+  span {
+    user-select: none;
+  }
 }
 
 .mainMenuItems {
@@ -239,6 +232,9 @@
 
 .systemMenu {
   align-items: center;
+  div {
+    transition: 0.5s ease all;
+  }
 }
 
 .mainMenuItems {
@@ -261,18 +257,16 @@
 }
 
 .dashboardMenu::-webkit-scrollbar {
-  width: 5px;
+  width: 4px;
 }
 
 .dashboardMenu::-webkit-scrollbar-thumb {
-  width: 6px;
   border-radius: 100rem;
-  background-color: #ffffff68;
+  background-color: var(--scroll);
 }
 
 a {
   text-decoration: none !important;
-  transition: 0.5s ease all;
 }
 
 @media screen and (min-width: 1240px) {

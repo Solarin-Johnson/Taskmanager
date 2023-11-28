@@ -2,10 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Table from "../../components/table";
 import { useInView } from "react-intersection-observer";
 
-export function TableList({ quickTask }) {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-  });
+export function TableList({ quickTask, setAction }) {
   const currentDate = new Date();
   const options = { day: "2-digit", month: "short", year: "numeric" };
   var todayDate = currentDate.toLocaleDateString("en-UK", options);
@@ -26,6 +23,7 @@ export function TableList({ quickTask }) {
 
   const action = (e) => {
     setNewAction(e);
+    setAction(e);
   };
 
   return (

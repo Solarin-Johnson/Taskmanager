@@ -6,6 +6,7 @@ body.light-mode {
   --progress-color: #4a4769;
   --complete-color: #295b3c;
   --trans-light: #ffffff85;
+  --scroll: #2a2d4260;
 }
 :root {
   --primary-color: #2b2e43;
@@ -15,9 +16,8 @@ body.light-mode {
   --progress-color: #c7b1ff;
   --complete-color: #b9ffb9;
   --trans-light: #2a2d4285;
+  --scroll: #ffffff40;
 }
-
-
 
 ::-webkit-scrollbar {
   width: 6px;
@@ -26,5 +26,5 @@ body.light-mode {
 ::-webkit-scrollbar-thumb {
   width: 6px;
   border-radius: 100rem;
-  background-color: #ffffff50;
+  background-color: var(--scroll);
 }

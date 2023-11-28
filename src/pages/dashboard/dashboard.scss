@@ -188,7 +188,6 @@
     &-filter {
       display: grid;
       grid-template-columns: repeat(2, auto);
-      // column-gap: 25px;
       justify-content: space-evenly;
       max-width: 300px;
       column-gap: 15px;
@@ -202,10 +201,14 @@
       }
 
       div :last-child {
-        margin-left: 5px;
-        padding: 0 10px;
+        align-self: center;
+        height: 85%;
+        display: grid;
+        align-content: center;
+        margin-left: 10px;
+        padding: 0 8px;
         border-radius: 10rem;
-        background-color: #2a2d53;
+        background-color: #3b405b;
         color: #fff;
       }
     }

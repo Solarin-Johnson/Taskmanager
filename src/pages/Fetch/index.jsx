@@ -78,6 +78,31 @@ export function FetchTask() {
         );
       });
 
+    const completed = storedDB.tasks
+      .map((task) => ({ ...task }))
+      .filter((task) => {
+        const dateObj = new Date(`${task.date} 2023`);
+        const month = (dateObj.getMonth() + 1).toString().padStart(2, 0);
+        const day = dateObj.getDate().toString().padStart(2, 0);
+        return (
+          Number(month) === Number(currentMonth) &&
+          Number(day) === Number(currentDay) &&
+          task.complete
+        );
+      });
+    const streak = storedDB.tasks
+      .map((task) => ({ ...task }))
+      .filter((task) => {
+        return task.complete;
+      });
+
+    const game = {
+      completed,
+      streak,
+    };
+    console.log(game);
+    localStorage.setItem("game", JSON.stringify(game));
+
     localStorage.setItem("Today", JSON.stringify(todayTasks));
     localStorage.setItem("Past", JSON.stringify(pastTasks));
     localStorage.setItem("Future", JSON.stringify(futureTasks));
