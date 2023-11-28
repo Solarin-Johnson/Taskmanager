@@ -70,12 +70,12 @@ export function UserCard({
   const [browserWidth, setBrowserWidth] = useState(window.innerWidth);
 
   useEffect(() => {
-    if (profile) {
-      profile.current.style.height = profile.current.offsetWidth + "px";
+    if (profile.current) {
+      profile.current.style.height = profile.current.scrollWidth + "px";
     }
     window.addEventListener("resize", () => {
       if (profile) {
-        profile.current.style.height = profile.current.offsetWidth + "px";
+        profile.current.style.height = profile.current.scrollWidth + "px";
       }
     });
   }, []);
