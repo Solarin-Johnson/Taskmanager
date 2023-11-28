@@ -86,7 +86,6 @@ export function Menubar({ showMenu }) {
       setLightMode(storedMode);
     } else {
       setLightMode(storedMode);
-      console.log(storedMode);
     }
   }, []);
 

@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import "./table.scss";
 import { useInView } from "react-intersection-observer";
+import { FetchTask } from "../../pages/Fetch";
 export default function Table({
   task,
   status,
@@ -9,6 +10,7 @@ export default function Table({
   time,
   index,
   i,
+  action,
 }) {
   const [checked, setChecked] = useState(complete);
 
@@ -22,19 +24,22 @@ export default function Table({
 
   const check = () => {
     const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    console.log(index);
     setChecked(!checked);
-    const newState = [...storedTasks];
-    newState[index].complete = !checked;
+    const newState = storedTasks;
+    storedTasks.tasks[index].complete = !checked;
     localStorage.setItem("tasks", JSON.stringify(newState));
+    FetchTask();
+    action("check task");
   };
 
   const deleteTask = () => {
     const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    const newState = [...storedTasks];
-    newState.splice(index, 1);
+    const newState = storedTasks;
+    console.log(index);
+    newState.tasks.splice(index, 1);
     localStorage.setItem("tasks", JSON.stringify(newState));
-    window.location.reload();
+    FetchTask();
+    action("deleted task");
   };
   if (task) {
     return (

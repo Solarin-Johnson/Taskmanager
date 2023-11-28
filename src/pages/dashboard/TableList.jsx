@@ -10,63 +10,23 @@ export function TableList({ quickTask }) {
   const options = { day: "2-digit", month: "short", year: "numeric" };
   var todayDate = currentDate.toLocaleDateString("en-UK", options);
   var todayDay = currentDate.toLocaleDateString("en-US", { weekday: "long" });
-  const storedTasks = JSON.parse(localStorage.getItem("tasks")) || false;
-  const [tasks, setTask] = useState(storedTasks);
   const tabContainer = useRef(null);
-  const todayTable = [];
-  const upcomingTable = [];
-
-  const todaysdate = new Intl.DateTimeFormat("en-US", {
-    month: "short",
-    day: "2-digit",
-  }).format(currentDate);
-
-  const dayIndex = currentDate.getDate().toString().padStart(2, "0");
-  const monthIndex = currentDate.getMonth().toString().padStart(2, "0");
+  const [newAction, setNewAction] = useState();
+  let todayData = localStorage.getItem("Today");
+  let futureData = localStorage.getItem("Future");
+  const [todayTable, setTodayTable] = useState(JSON.parse(todayData) || false);
+  const [upcomingTable, setUpcomingTable] = useState(
+    JSON.parse(futureData) || false
+  );
 
   useEffect(() => {
-    try {
-      const updatedTasks = [...tasks];
-      updatedTasks.map((data, index) => {
-        if (
-          (Number(data.monthIndex) <= Number(monthIndex) + 1 &&
-            Number(data.dayIndex) < Number(dayIndex)) ||
-          Number(data.monthIndex) < Number(monthIndex) + 1
-        ) {
-          updatedTasks.splice(index, 1);
-          setTask(updatedTasks);
-        }
-        return localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+    setTodayTable(JSON.parse(localStorage.getItem("Today")) || false);
+    setUpcomingTable(JSON.parse(localStorage.getItem("Future")) || false);
+  }, [newAction, quickTask]);
 
-  try {
-    tasks.map((data, index) => {
-      if (
-        Number(data.dayIndex) === Number(dayIndex) &&
-        Number(data.monthIndex) === Number(monthIndex) + 1
-      ) {
-        todayTable.push([data, index]);
-      } else {
-        upcomingTable.push([data, index]);
-      }
-      return data;
-    });
-  } catch (error) {
-    console.log(error);
-  }
-
-  useEffect(() => {
-    const storedTasks = JSON.parse(localStorage.getItem("tasks")) || false;
-    setTask(storedTasks);
-  }, [quickTask]);
-  useEffect(() => {
-    const storedTasks = JSON.parse(localStorage.getItem("tasks")) || false;
-    setTask(storedTasks);
-  }, []);
+  const action = (e) => {
+    setNewAction(e);
+  };
 
   return (
     <div className={`table-wrapper`}>
@@ -85,11 +45,12 @@ export function TableList({ quickTask }) {
             todayTable.map((task, index) => (
               <Table
                 key={index}
-                task={task[0].task}
-                priority={task[0].priority}
-                complete={task[0].complete}
-                time={task[0].time}
-                index={task[1]}
+                task={task.task}
+                priority={task.priority}
+                complete={task.complete}
+                time={task.time}
+                index={task.index}
+                action={action}
               />
             ))) || <Table />}
         </div>
@@ -99,20 +60,21 @@ export function TableList({ quickTask }) {
         <div className="table-header">
           <div className="table-title">
             <span>Upcoming</span>
-            <span>{upcomingTable.length}</span>
+            <span>{upcomingTable.length || 0}</span>
           </div>
         </div>
         <div className="table-container" ref={tabContainer}>
           {(upcomingTable.length > 0 &&
             upcomingTable.map((task, index) => (
               <Table
-                task={task[0].task}
-                priority={task[0].priority}
-                complete={task[0].complete}
-                time={task[0].date}
-                index={task[1]}
+                task={task.task}
+                priority={task.priority}
+                complete={task.complete}
+                time={task.date}
+                index={task.index}
                 i={index}
                 key={index}
+                action={action}
               />
             ))) || <Table />}
         </div>

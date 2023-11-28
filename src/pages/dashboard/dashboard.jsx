@@ -4,6 +4,7 @@ import "./dashboard.scss";
 import { QuickTask } from "../quickTask";
 import { TableList } from "./TableList";
 import CreateTask from "../createTask";
+import { FetchTask } from "../Fetch";
 export default function Dashboard() {
   const [quickTask, setQuickTask] = useState();
   const [pop, setPop] = useState(false);
@@ -14,79 +15,7 @@ export default function Dashboard() {
   const [streak, setStreak] = useState(storeStreak);
   const [progress, setProgress] = useState("");
   const streakArray = [];
-  const currentDate = new Date();
-  const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, "0");
-  const currentDay = currentDate.getDate().toString().padStart(2, "0");
-
-  const taskDb = {
-    name: "Solarin",
-    profile: 1,
-    tasks: [
-      {
-        task: "Mtcheew",
-        priority: "High",
-        time: "1AM",
-        complete: false,
-        date: "Nov 28",
-        dayIndex: 28,
-        monthIndex: 11,
-      },
-      {
-        task: "Eran",
-        priority: "Normal",
-        time: "2PM",
-        complete: false,
-        date: "Nov 29",
-        dayIndex: 28,
-        monthIndex: 11,
-      },
-      {
-        task: "Shit",
-        priority: "High",
-        time: "1AM",
-        complete: false,
-        date: "Nov 27",
-        dayIndex: 28,
-        monthIndex: 11,
-      },
-    ],
-  };
-
-  const todayTasks = taskDb.tasks.filter((task) => {
-    const dateObj = new Date(`${task.date} 2023`);
-    const month = (dateObj.getMonth() + 1).toString().padStart(2, 0);
-    const day = dateObj.getDate().toString().padStart(2, 0);
-    return (
-      Number(month) === Number(currentMonth) &&
-      Number(day) === Number(currentDay)
-    );
-  });
-  const pastTasks = taskDb.tasks.filter((task) => {
-    const dateObj = new Date(`${task.date} 2023`);
-    const month = (dateObj.getMonth() + 1).toString().padStart(2, 0);
-    const day = dateObj.getDate().toString().padStart(2, 0);
-    return (
-      (Number(month) <= Number(currentMonth) &&
-        Number(day) < Number(currentDay)) ||
-      Number(month) < Number(currentMonth)
-    );
-  });
-  const futureTasks = taskDb.tasks.filter((task) => {
-    const dateObj = new Date(`${task.date} 2023`);
-    const month = (dateObj.getMonth() + 1).toString().padStart(2, 0);
-    const day = dateObj.getDate().toString().padStart(2, 0);
-    console.log(day);
-    return (
-      (Number(month) >= Number(currentMonth) &&
-        Number(day) > Number(currentDay)) ||
-      Number(month) > Number(currentMonth)
-    );
-  });
-  localStorage.setItem("Today", JSON.stringify(todayTasks));
-  localStorage.setItem("Past", JSON.stringify(pastTasks));
-  localStorage.setItem("Future", JSON.stringify(futureTasks));
-
-  console.log(todayTasks);
+  FetchTask();
 
   // if (!localStorage.getItem("first")) {
   //   localStorage.setItem("first", dayIndex);
@@ -99,39 +28,11 @@ export default function Dashboard() {
     setTask(JSON.parse(localStorage.getItem("tasks")));
   }, []);
 
-  // useEffect(() => {
-  //   try {
-  //     tasks.map((data, index) => {
-  //       today.push(data);
-  //       if (
-  //         Number(data.dayIndex) === Number(dayIndex) &&
-  //         Number(data.monthIndex) === Number(monthIndex) + 1
-  //       ) {
-  //         if (data.complete === true) {
-  //           streakArray.push(data);
-  //         }
-  //       }
-  //       return data;
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   try {
-  //     localStorage.setItem("streak", Math.round(streakArray.length));
-  //     setProgress(Math.round((streakArray.length / today.length) * 100));
-  //     setStreak(Math.abs(dayIndex - Number(localStorage.getItem("first"))));
-  //   } catch (error) {}
-  // }, []);
-
   const completed = [];
   try {
     tasks.map((data, i) => {
       if (data.complete) {
         completed.push(data);
-        console.log(completed);
       }
       return data;
     });

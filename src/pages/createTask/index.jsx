@@ -124,21 +124,15 @@ export default function CreateTask({ qTask, newPop, popReturn }) {
       setErr(true);
     } else {
       const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-      const newTask = [
-        ...storedTasks,
-        {
-          task: data.title,
-          priority: data.priority,
-          time: `${data.time}${data.xTime}`,
-          complete: false,
-          date: data.date,
-          dayIndex: parseInt(data.date.split(" ")[1], 10),
-          monthIndex: monthAbbreviations[data.date.split(" ")[0]],
-        },
-      ];
-      localStorage.setItem("tasks", JSON.stringify(newTask));
-      qTask(newTask);
-      //   hide();
+      const newTask = storedTasks.tasks.push({
+        task: data.title,
+        priority: data.priority,
+        time: `${data.time}${data.xTime}`,
+        complete: false,
+        date: data.date,
+      });
+      localStorage.setItem("tasks", JSON.stringify(storedTasks));
+      qTask(storedTasks);
       popReturn(false);
     }
   };

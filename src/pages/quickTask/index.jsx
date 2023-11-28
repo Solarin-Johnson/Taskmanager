@@ -12,15 +12,13 @@ export function QuickTask({ qTask }) {
     const monthIndex = today.getMonth().toString().padStart(2, "0");
     if (quickTaskValue.current && quickTaskValue.current.value.length >= 4) {
       const newTask = [
-        ...storedTasks,
+        storedTasks,
         {
           task: quickTaskValue.current.value,
           priority: "Normal",
           time: "Soon",
           complete: false,
           date: todaysdate,
-          dayIndex: dayIndex,
-          monthIndex: Number(monthIndex) + 1,
         },
       ];
       localStorage.setItem("tasks", JSON.stringify(newTask));
