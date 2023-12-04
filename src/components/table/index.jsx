@@ -47,7 +47,7 @@ export default function Table({
       clean.classList.add("slide-away");
       setTimeout(() => {
         deleteTask();
-      }, 400);
+      }, 200);
     }
   }, [leftInView, rightInView]);
 

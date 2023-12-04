@@ -15,12 +15,14 @@ export default function Dashboard() {
   const [newAction, setNewAction] = useState("");
   const game = JSON.parse(localStorage.getItem("game")) || [];
   const [completed, setCompleted] = useState(game.completed);
-  const [streak, setStreak] = useState([game.streak]);
+  const [streak, setStreak] = useState(game.streak);
+  const [todayCompleted, setTodayCompleted] = useState(game.todayCompleted);
   FetchTask();
   useEffect(() => {
     const game = JSON.parse(localStorage.getItem("game")) || [];
     setCompleted(game.completed);
     setStreak(game.streak);
+    setTodayCompleted(game.todayCompleted);
   }, [newAction]);
 
   const qTask = (e) => {
@@ -51,7 +53,8 @@ export default function Dashboard() {
           streak={streak.length}
           completed={completed.length}
           progress={
-            storedTasks.tasks && (completed.length / todayTasks.length) * 100
+            storedTasks.tasks &&
+            (completed.length / todayCompleted.length) * 100
           }
           newPop={newPop}
         />

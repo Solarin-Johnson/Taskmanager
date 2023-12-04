@@ -23,7 +23,7 @@ export function QuickTask({ qTask }) {
       localStorage.setItem("tasks", JSON.stringify(storedTasks));
       qTask(newTask);
       vibrate(50);
-      
+      quickTaskValue.current.value = "";
     }
   };
   return (

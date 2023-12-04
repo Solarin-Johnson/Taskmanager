@@ -78,6 +78,11 @@ export function FetchTask() {
         );
       });
 
+    const todayCompleted = storedDB.tasks
+      .map((task) => ({ ...task }))
+      .filter((task) => {
+        return task.complete;
+      });
     const completed = storedDB.tasks
       .map((task) => ({ ...task }))
       .filter((task) => {
@@ -99,6 +104,7 @@ export function FetchTask() {
     const game = {
       completed,
       streak,
+      todayCompleted,
     };
     console.log(game);
     localStorage.setItem("game", JSON.stringify(game));

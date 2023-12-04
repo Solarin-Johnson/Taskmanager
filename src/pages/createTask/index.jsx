@@ -165,6 +165,7 @@ export default function CreateTask({ qTask, newPop, popReturn }) {
               name="title"
               id="title"
               ref={titleInput}
+              autoFocus
               onChange={(e) =>
                 setData((prevData) => ({
                   ...prevData,

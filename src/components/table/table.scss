@@ -13,6 +13,7 @@
   font-weight: 600;
   scroll-snap-align: start;
   &-container {
+    text-transform: capitalize;
     height: 55px;
     box-shadow: 0 0 10px #33375025;
     border-radius: 10px;
@@ -22,7 +23,6 @@
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    transition: 1.5s ease;
 
     &::-webkit-scrollbar {
       display: none;
