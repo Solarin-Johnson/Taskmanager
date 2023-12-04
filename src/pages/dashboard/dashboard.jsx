@@ -5,10 +5,12 @@ import { QuickTask } from "../quickTask";
 import { TableList } from "./TableList";
 import CreateTask from "../createTask";
 import { FetchTask } from "../Fetch";
+import { vibrate } from "../../components/table";
 export default function Dashboard() {
   const [quickTask, setQuickTask] = useState();
   const [pop, setPop] = useState(false);
   const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  const pastTasks = JSON.parse(localStorage.getItem("Past")) || [];
   const todayTasks = JSON.parse(localStorage.getItem("Today")) || [];
   const [newAction, setNewAction] = useState("");
   const game = JSON.parse(localStorage.getItem("game")) || [];
@@ -40,7 +42,11 @@ export default function Dashboard() {
       <div className="dashboard-container">
         <UserCard
           name={storedTasks.name}
-          all={storedTasks.tasks && storedTasks.tasks.length}
+          all={
+            storedTasks.tasks && pastTasks
+              ? storedTasks.tasks.length - pastTasks.length
+              : 0
+          }
           points={storedTasks.tasks && storedTasks.tasks.length * 2}
           streak={streak.length}
           completed={completed.length}
@@ -127,7 +133,13 @@ export function UserCard({
             <span>{completed || 0}</span>
           </div>
         </div>
-        <div className="usercard-tabs-new" onClick={() => newPop(true)}>
+        <div
+          className="usercard-tabs-new"
+          onClick={() => {
+            newPop(true);
+            vibrate(50);
+          }}
+        >
           <span>New Task</span>
           <i className="fa-solid fa-plus"></i>
         </div>

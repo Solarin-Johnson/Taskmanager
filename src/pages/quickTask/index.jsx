@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import "./newtask.scss";
+import { vibrate } from "../../components/table";
 
 export function QuickTask({ qTask }) {
   const quickTaskValue = useRef(null);
@@ -21,6 +22,8 @@ export function QuickTask({ qTask }) {
       });
       localStorage.setItem("tasks", JSON.stringify(storedTasks));
       qTask(newTask);
+      vibrate(50);
+      
     }
   };
   return (

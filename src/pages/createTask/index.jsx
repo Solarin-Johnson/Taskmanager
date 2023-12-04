@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./createTask.scss";
+import { vibrate } from "../../components/table";
 export default function CreateTask({ qTask, newPop, popReturn }) {
   const currentYear = new Date().getFullYear();
   const months = [
@@ -134,6 +135,7 @@ export default function CreateTask({ qTask, newPop, popReturn }) {
       localStorage.setItem("tasks", JSON.stringify(storedTasks));
       qTask(newTask);
       popReturn(false);
+      vibrate(50);
     }
   };
   const container = useRef(null);
