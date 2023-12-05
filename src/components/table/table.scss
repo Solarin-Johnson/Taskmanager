@@ -18,9 +18,10 @@
     box-shadow: 0 0 10px #33375025;
     border-radius: 10px;
     display: grid;
-    grid-template-columns: 200px 100% 200px;
+    grid-template-columns: 50% 100% 50%;
+    justify-content: start;
     align-items: center;
-    overflow-x: auto;
+    overflow-x: scroll;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
 

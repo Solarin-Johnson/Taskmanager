@@ -49,7 +49,6 @@ export function Menubar({ showMenu }) {
   const spread = () => {
     menuContainer.current.id = "spread";
     menuContainer.current.parentElement.id = "spreadParent";
-    // setTimeout(() => {
     setMenuItems(["Dashboard", "New Task", "Search Task"]);
     setSystemItems([(lightMode && "Dark Mode") || "Light Mode"]);
   };
@@ -192,6 +191,7 @@ export function Head({ showMenu }) {
         )}
         <div className="top-header">
           <label className="search" ref={searchRef}>
+            <i className="fa-solid fa-magnifying-glass"></i>
             <input
               type="text"
               name="search"
@@ -199,7 +199,6 @@ export function Head({ showMenu }) {
               placeholder={"Search Task"}
               onChange={(e) => setSearch(e.target.value)}
             />
-            <i className="fa-solid fa-magnifying-glass"></i>
           </label>
           <div className="notification">
             <span className="notification-number">2</span>
