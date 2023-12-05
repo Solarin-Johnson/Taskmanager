@@ -30,6 +30,12 @@ export function SearchTask({ search, searchRef }) {
     }
   }, [search]);
 
+  const [newAction, setNewAction] = useState("");
+
+  const action = (e) => {
+    setNewAction(e);
+  };
+
   if (search.length > 0 && !hideBox) {
     return (
       <div className="search-task-container" ref={searchBox}>
@@ -37,18 +43,21 @@ export function SearchTask({ search, searchRef }) {
           <span>Search Result for</span> <span>{search}</span>
         </div>
         <div className="search-task-result">
-          <SearchResults search={search} />
+          <SearchResults search={search} setAction={action} />
         </div>
       </div>
     );
   }
 }
 
-export function SearchResults({ search }) {
+export function SearchResults({ search, setAction }) {
   const storedTasks = JSON.parse(localStorage.getItem("tasks"));
   const searchResults = storedTasks.tasks.filter((task) =>
     task.task.toLowerCase().includes(search.toLowerCase())
   );
+  const action = (e) => {
+    setAction(e);
+  };
   return storedTasks &&
     storedTasks.length !== 0 &&
     searchResults.length !== 0 ? (
@@ -59,6 +68,7 @@ export function SearchResults({ search }) {
         priority={task.priority}
         complete={task.complete}
         time={task.time}
+        readonly={true}
       />
     ))
   ) : (

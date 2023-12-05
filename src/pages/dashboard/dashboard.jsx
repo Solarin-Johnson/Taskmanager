@@ -51,10 +51,10 @@ export default function Dashboard() {
           }
           points={storedTasks.tasks && storedTasks.tasks.length * 2}
           streak={streak.length}
-          completed={completed.length}
+          completed={todayCompleted.length}
           progress={
             storedTasks.tasks &&
-            (completed.length / todayCompleted.length) * 100
+            (todayCompleted.length / todayTasks.length) * 100
           }
           newPop={newPop}
         />

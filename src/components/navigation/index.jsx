@@ -9,13 +9,6 @@ export function Menubar({ showMenu }) {
   const systemMenu = useRef(null);
   const [menuItems, setMenuItems] = useState(["", "", ""]);
   const [systemItems, setSystemItems] = useState([""]);
-  const [linkName] = useState([
-    "dashboard",
-    "profit",
-    "transactions",
-    "invest",
-    "refer",
-  ]);
 
   useEffect(() => {
     if (showMenu) {
@@ -42,7 +35,11 @@ export function Menubar({ showMenu }) {
     }
   }, [menuItems]);
 
-  const [menuIcons] = useState(["home_app_logo", "monitoring", "settings"]);
+  const [menuIcons] = useState([
+    "home_app_logo",
+    "add_task",
+    "quick_reference_all",
+  ]);
   const [systemIcons, setSystemIcons] = useState(["light_mode"]);
 
   useEffect(() => {
@@ -53,7 +50,7 @@ export function Menubar({ showMenu }) {
     menuContainer.current.id = "spread";
     menuContainer.current.parentElement.id = "spreadParent";
     // setTimeout(() => {
-    setMenuItems(["Dashboard", "Task Insight", "Settings"]);
+    setMenuItems(["Dashboard", "New Task", "Search Task"]);
     setSystemItems([(lightMode && "Dark Mode") || "Light Mode"]);
   };
   const [browserWidth, setBrowserWidth] = useState(window.innerWidth);

@@ -14,7 +14,7 @@ export default function Table({
   complete,
   time,
   index,
-  i,
+  readonly,
   action,
 }) {
   const [swipeLeftRef, leftInView] = useInView({
@@ -36,18 +36,18 @@ export default function Table({
       clean.lastChild.classList = "swipe-right";
     }
 
-    if (leftInView) {
+    if (leftInView && !readonly) {
       clean.firstChild.classList.add("swiped-left");
       vibrate(70);
       check();
     }
-    if (rightInView) {
+    if (rightInView && !readonly) {
       clean.lastChild.classList.add("swiped-right");
       vibrate(50);
       clean.classList.add("slide-away");
       setTimeout(() => {
         deleteTask();
-      }, 200);
+      }, 400);
     }
   }, [leftInView, rightInView]);
 

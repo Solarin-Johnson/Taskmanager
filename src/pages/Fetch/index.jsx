@@ -78,12 +78,12 @@ export function FetchTask() {
         );
       });
 
-    const todayCompleted = storedDB.tasks
+    const completed = storedDB.tasks
       .map((task) => ({ ...task }))
       .filter((task) => {
         return task.complete;
       });
-    const completed = storedDB.tasks
+    const todayCompleted = storedDB.tasks
       .map((task) => ({ ...task }))
       .filter((task) => {
         const dateObj = new Date(`${task.date} 2023`);
