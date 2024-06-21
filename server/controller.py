@@ -1,5 +1,5 @@
 from database import todos
-from model import Todo
+from model import Todo, UpdateTodo
 from fastapi.responses import JSONResponse
 from fastapi import status
 from schema import todo_serializer, todos_serializer
@@ -43,7 +43,7 @@ async def delete_todo(id: str):
         return JSONResponse(content={'message': "Unable to delete todo"}, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
     
-async def update_todo(id: str, todo: Todo):
+async def update_todo(id: str, todo: UpdateTodo):
     payload = {key: value for key, value in todo.items() if value is not None}
     
     return payload
