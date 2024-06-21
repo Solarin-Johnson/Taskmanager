@@ -10,3 +10,11 @@ async def new_todo(todo: Todo):
     except Exception as e:
         print(e)
         return JSONResponse(content={'message': "Unable to add todo"}, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+async def find_todo(key: str):
+    try:
+        todo = todos.get(key)
+        return JSONResponse(content={'message': "Todo Found!", "data": todo}, status_code=status.HTTP_200_OK) if todo else JSONResponse(status_code=status.HTTP_404_NOT_FOUND, content={'message': 'Invalid Todo key!'})
+    except Exception as e:
+        print(e)
+        return JSONResponse(content={'message': "Unable to find todo"}, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
