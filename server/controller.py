@@ -45,5 +45,15 @@ async def delete_todo(id: str):
     
 async def update_todo(id: str, todo: UpdateTodo):
     payload = {key: value for key, value in todo.items() if value is not None}
+    try:
+        todo = todos.get(id)
+        
+        if not todo:
+            return JSONResponse(status_code=status.HTTP_404_NOT_FOUND, content={'message': 'Invalid Todo Id!'})
+        
+        todos.update(updates=payload, key=id)
+        return JSONResponse(content={'message': "Todo Updated!"}, status_code=status.HTTP_200_OK)
     
-    return payload
+    except Exception as e:
+        print(e)
+        return JSONResponse(content={'message': "Unable to update todo"}, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
